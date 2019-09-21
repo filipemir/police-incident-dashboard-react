@@ -9,12 +9,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoicG9saWNlLWluY2lkZW50LWRhc2hib2FyZCIsImEiOiJja
 const path = `https://cors-anywhere.herokuapp.com/https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "12cb3883-56f5-47de-afa5-3b1cf61b257b" WHERE "DISTRICT" LIKE 'B3' limit 100`;
 
 const geojsonPromise = fetch(path)
-    .then(res => {
-      return res.json();
-    })
-    .then(json => {
-      return geojson.parse(json.result.records, {Point: ['Lat', 'Long']});
-    });
+    .then(res => res.json())
+    .then(json => geojson.parse(json.result.records, {Point: ['Lat', 'Long']}));
 
 function App() {
 
