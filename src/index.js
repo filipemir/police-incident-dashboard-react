@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Map from './App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Map />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 serviceWorker.unregister();

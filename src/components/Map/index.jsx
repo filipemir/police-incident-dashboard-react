@@ -7,7 +7,8 @@ import { getIncidents } from "../../client";
 
 const DATE_FORMAT = 'YYYY-MM-DD hh:mm',
     TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+    TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    UPDATE_INTERVAL = 60000;
 
 function getIncidentPopupText({ incident }) {
     return JSON.stringify(incident);
@@ -32,11 +33,19 @@ export default function Index() {
     useEffect(() => {
         const map = getLeafletMap(),
             endDate = moment().format(DATE_FORMAT),
-            startDate = moment().subtract(24, 'hours').format(dateFormat);
+            startDate = moment().subtract(24, 'hours').format(DATE_FORMAT);
+        let incidentsLayer;
 
-        getIncidents({ startDate, endDate }).then(incidents => {
-            getIncidentsLayer({ incidents }).addTo(map);
-        });
+        const intervalId = setInterval(() => {
+            getIncidents({ startDate, endDate }).then(incidents => {
+                if (incidentsLayer) {
+                    incidentsLayer.clearLayers();
+                }
+                incidentsLayer = getIncidentsLayer({ incidents }).addTo(map);
+            });
+        }, UPDATE_INTERVAL);
+
+        return () => clearInterval(intervalId);
     });
 
   return <div id="map" style={{width: "100vw", height: "100vh" }} />;
