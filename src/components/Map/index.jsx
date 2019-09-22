@@ -36,14 +36,17 @@ export default function Index() {
             startDate = moment().subtract(24, 'hours').format(DATE_FORMAT);
         let incidentsLayer;
 
-        const intervalId = setInterval(() => {
+        const displayIncidents = () => {
             getIncidents({ startDate, endDate }).then(incidents => {
                 if (incidentsLayer) {
                     incidentsLayer.clearLayers();
                 }
                 incidentsLayer = getIncidentsLayer({ incidents }).addTo(map);
             });
-        }, UPDATE_INTERVAL);
+        };
+
+        displayIncidents();
+        const intervalId = setInterval(displayIncidents, UPDATE_INTERVAL);
 
         return () => clearInterval(intervalId);
     });
