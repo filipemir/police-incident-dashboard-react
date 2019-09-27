@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.scss"],"names":[],"mappings":"AAAA,iBACE,wBAAyB,CACzB,wBAAyB,CACzB,iBAAkB,CAClB,WAAa","file":"main.e2e00da6.chunk.css","sourcesContent":[".incident-marker {\n  background-color: #cc0202;\n  border: 1px solid #cc0202;\n  border-radius: 50%;\n  opacity: 0.25;\n}"]}
