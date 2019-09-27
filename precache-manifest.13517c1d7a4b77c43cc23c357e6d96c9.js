@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f99ed7f2199f2ebe6cd4b1f6fc30f2e3",
+    "revision": "8857c4254de83af0f390c9ae5d71a84a",
     "url": "/police-incident-dashboard-react/index.html"
   },
   {
-    "revision": "d9003f7e33400437dafe",
-    "url": "/police-incident-dashboard-react/static/css/main.e2e00da6.chunk.css"
+    "revision": "553ac4bee294a92820fd",
+    "url": "/police-incident-dashboard-react/static/css/main.43a0abcf.chunk.css"
   },
   {
     "revision": "78f84593b7a5e4767c1e",
     "url": "/police-incident-dashboard-react/static/js/2.f8f8149a.chunk.js"
   },
   {
-    "revision": "d9003f7e33400437dafe",
-    "url": "/police-incident-dashboard-react/static/js/main.e62e3be2.chunk.js"
+    "revision": "553ac4bee294a92820fd",
+    "url": "/police-incident-dashboard-react/static/js/main.3be5db3a.chunk.js"
   },
   {
     "revision": "f284de44bc748eecb325",
