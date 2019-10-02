@@ -33,7 +33,7 @@ export default function Index() {
     useEffect(() => {
         const map = getLeafletMap(),
             endDate = moment().format(DATE_FORMAT),
-            startDate = moment().subtract(24, 'hours').format(DATE_FORMAT);
+            startDate = moment().subtract(72, 'hours').format(DATE_FORMAT);
         let incidentsLayer;
 
         const displayIncidents = () => {
