@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/police-incident-dashboard-react/static/css/main.43a0abcf.chunk.css",
-    "main.js": "/police-incident-dashboard-react/static/js/main.3be5db3a.chunk.js",
-    "main.js.map": "/police-incident-dashboard-react/static/js/main.3be5db3a.chunk.js.map",
+    "main.css": "/police-incident-dashboard-react/static/css/main.c6f35e11.chunk.css",
+    "main.js": "/police-incident-dashboard-react/static/js/main.88306d07.chunk.js",
+    "main.js.map": "/police-incident-dashboard-react/static/js/main.88306d07.chunk.js.map",
     "runtime-main.js": "/police-incident-dashboard-react/static/js/runtime-main.81e25587.js",
     "runtime-main.js.map": "/police-incident-dashboard-react/static/js/runtime-main.81e25587.js.map",
-    "static/js/2.f8f8149a.chunk.js": "/police-incident-dashboard-react/static/js/2.f8f8149a.chunk.js",
-    "static/js/2.f8f8149a.chunk.js.map": "/police-incident-dashboard-react/static/js/2.f8f8149a.chunk.js.map",
+    "static/js/2.8774d112.chunk.js": "/police-incident-dashboard-react/static/js/2.8774d112.chunk.js",
+    "static/js/2.8774d112.chunk.js.map": "/police-incident-dashboard-react/static/js/2.8774d112.chunk.js.map",
     "index.html": "/police-incident-dashboard-react/index.html",
-    "precache-manifest.13517c1d7a4b77c43cc23c357e6d96c9.js": "/police-incident-dashboard-react/precache-manifest.13517c1d7a4b77c43cc23c357e6d96c9.js",
+    "precache-manifest.7ff8534b50e5e6b437a4a590e4f5cfb7.js": "/police-incident-dashboard-react/precache-manifest.7ff8534b50e5e6b437a4a590e4f5cfb7.js",
     "service-worker.js": "/police-incident-dashboard-react/service-worker.js",
-    "static/css/main.43a0abcf.chunk.css.map": "/police-incident-dashboard-react/static/css/main.43a0abcf.chunk.css.map"
+    "static/css/main.c6f35e11.chunk.css.map": "/police-incident-dashboard-react/static/css/main.c6f35e11.chunk.css.map"
   }
 }
