@@ -1,6 +1,7 @@
 import geojson from "geojson";
 
-const BASE_SQL_QUERY_URL = `https://cors-anywhere.herokuapp.com/https://data.boston.gov/api/3/action/datastore_search_sql?sql=`;
+//const BASE_SQL_QUERY_URL = `https://cors-anywhere.herokuapp.com/https://data.boston.gov/api/3/action/datastore_search_sql?sql=`;
+const BASE_SQL_QUERY_URL = `https://4oxhn20ej1.execute-api.us-west-2.amazonaws.com/cors_workaround?sql=`;
 
 /**
  * Returns a collection of geoJSON objects representing incidents
