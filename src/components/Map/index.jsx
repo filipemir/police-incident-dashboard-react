@@ -1,56 +1,47 @@
-import React, { useEffect } from 'react';
-import './styles.scss';
-import moment from "moment";
+import React, { useState, useEffect } from 'react';
 import leaflet from "leaflet";
+import hash from 'object-hash';
+import { Map, TileLayer, GeoJSON } from 'react-leaflet'
 
-import { getIncidents } from "../../client";
+import './styles.scss';
+import {getIncidents} from "../../client";
 
-const DATE_FORMAT = 'YYYY-MM-DD hh:mm',
-    TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-    TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    UPDATE_INTERVAL = 60000;
-
-function getIncidentPopupText({ incident }) {
-    return JSON.stringify(incident);
-}
+const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function getIncidentMarker(incident, latLng) {
     return leaflet.marker(latLng, {icon: leaflet.divIcon({className: 'incident-marker'}) });
 }
 
-function getLeafletMap() {
-    const map = leaflet.map('map').setView([42.3, -71.0589], 13);
-    leaflet.tileLayer(TILE_LAYER_URL, {TILE_LAYER_ATTRIBUTION, maxZoom: 19}).addTo(map);
-    return map;
+function bindIncidentPopup(feature, layer) {
+    layer.bindPopup(JSON.stringify(feature.properties));
 }
 
-function getIncidentsLayer({ incidents }) {
-    return leaflet.geoJSON(incidents, { pointToLayer: getIncidentMarker })
-        .bindPopup((layer) => getIncidentPopupText({ incident: layer.feature.properties }));
-}
-
-export default function Index() {
-    useEffect(() => {
-        const map = getLeafletMap(),
-            endDate = moment().format(DATE_FORMAT),
-            startDate = moment().subtract(24, 'hours').format(DATE_FORMAT);
-        let incidentsLayer;
-
-        const displayIncidents = () => {
-            getIncidents({ startDate, endDate }).then(incidents => {
-                if (incidentsLayer) {
-                    incidentsLayer.clearLayers();
-                }
-                incidentsLayer = getIncidentsLayer({ incidents }).addTo(map);
-            });
+/**
+ * @param {[number, number]} latLong - Lat/Long for where the map should be centered when loaded
+ * @param {moment} startDate - The start date/time for incidents to be mapped
+ * @param {moment} endDate - The end date/time for the incidents to be mapped
+ * @param {number} [updateInterval=60000] Number of milliseconds between data refreshes
+ * @returns React component
+ * @constructor
+ */
+export default function IncidentMap({ latLong, startDate, endDate, updateInterval = 60000 }) {
+    const [incidents, setIncidents] = useState([]),
+        refreshIncidents = () => {
+            getIncidents({ startDate, endDate }).then(incidents => { setIncidents(incidents) });
         };
 
-        displayIncidents();
-        const intervalId = setInterval(displayIncidents, UPDATE_INTERVAL);
-
+    useEffect(() => {
+        refreshIncidents();
+        const intervalId = setInterval(refreshIncidents, updateInterval);
         return () => clearInterval(intervalId);
     });
 
-  return <div id="map" style={{width: "100vw", height: "100vh" }} />;
+    return <div className="map-root">
+        <Map center={latLong} zoom={13}>
+            <TileLayer url={TILE_LAYER_URL} attribution={TILE_LAYER_ATTRIBUTION} />
+            <GeoJSON key={hash(incidents)} data={incidents} pointToLayer={getIncidentMarker} onEachFeature={bindIncidentPopup}/>
+        </Map>
+    </div>;
 }
 
