@@ -35,7 +35,7 @@ export default function IncidentMap({ latLong, startDate, endDate, updateInterva
         refreshIncidents();
         const intervalId = setInterval(refreshIncidents, updateInterval);
         return () => clearInterval(intervalId);
-    });
+    }, [incidents]);
 
     return <div className="map-root">
         <Map center={latLong} zoom={13}>
