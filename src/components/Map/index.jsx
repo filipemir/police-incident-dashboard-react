@@ -4,13 +4,24 @@ import hash from 'object-hash';
 import { Map, TileLayer, GeoJSON } from 'react-leaflet'
 
 import './styles.scss';
-import {getIncidents} from "../../client";
+import {getIncidents, codeGroupScale} from "../../client";
 
 const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
     TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function getIncidentMarker(incident, latLng) {
-    return leaflet.marker(latLng, {icon: leaflet.divIcon({className: 'incident-marker'}) });
+    const cg = incident.properties['OFFENSE_CODE_GROUP'];
+    if (incident.properties['SHOOTING'] == 'Y') {
+        return leaflet.marker(latLng, {icon: leaflet.divIcon({className: 'incident-marker'})});
+    } else {
+        return leaflet.circleMarker(latLng, {
+            radius: 4,
+            color: codeGroupScale(cg),
+            weight: 1,
+            opacity: 0.5,
+            fillOpacity: 0.25
+        });
+    }
 }
 
 function bindIncidentPopup(feature, layer) {
