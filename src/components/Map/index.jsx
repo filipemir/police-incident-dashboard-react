@@ -14,7 +14,9 @@ function getIncidentMarker(incident, latLng) {
 }
 
 function bindIncidentPopup(feature, layer) {
-    layer.bindPopup(JSON.stringify(feature.properties));
+    const properties = Object.keys(feature.properties).filter(p => !p.startsWith('_'));
+    const list = properties.map(p => `<tr><th>${p.replace(/_/g,' ')}</th><td>${feature.properties[p]}<td></tr>`)
+    layer.bindPopup(`<table><tbody>${list}</tbody></table>`);
 }
 
 /**
