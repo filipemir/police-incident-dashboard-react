@@ -1,0 +1,19 @@
+.map-controls {
+    position: fixed;
+    background-color: white;
+    z-index: 1;
+    top: 20px;
+    right: 20px;
+    padding: 20px 10px;
+    box-shadow: 0 0 10px -2px rgba(0,0,0,.25);
+    border-radius: 4px;
+
+    .timeframe-picker {
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .timeframe-picker__selector {
+      width: 100%;
+    }
+  }
