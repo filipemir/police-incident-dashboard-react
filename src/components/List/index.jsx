@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { codeGroupScale } from "../../client";
+import { codeGroupScale } from "../../utils/codeGroups";
 import './styles.scss';
 
 export default function IncidentList({ incidents }) {
@@ -10,14 +10,7 @@ export default function IncidentList({ incidents }) {
             return (
                 <details>
                     <summary>
-                        <div style={{
-                            'backgroundColor': codeGroupScale(inc.properties['OFFENSE_CODE_GROUP']),
-                            'borderRadius': '50%',
-                            'display': 'inline-block',
-                            'width': '.75em',
-                            'height': '.75em',
-                            'marginRight': '1em',
-                        }}></div>
+                        <div className="incident-dot" style={{'backgroundColor': codeGroupScale(inc.properties['OFFENSE_CODE_GROUP'])}} />
                         {inc.properties['INCIDENT_NUMBER']}
                         ({inc.properties['OCCURRED_ON_DATE']})
                     </summary>
