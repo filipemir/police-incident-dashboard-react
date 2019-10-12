@@ -40,16 +40,17 @@ function bindIncidentPopup(feature, layer) {
  * @constructor
  */
 export default function IncidentMap({ latLong, startDate, endDate, updateInterval = 60000 }) {
-    const [incidents, setIncidents] = useState([]),
-        refreshIncidents = () => {
-            getIncidents({ startDate, endDate }).then(incidents => { setIncidents(incidents) });
-        };
+    const [incidents, setIncidents] = useState([]);
 
     useEffect(() => {
+        const refreshIncidents = () => {
+              getIncidents({ startDate, endDate }).then(i => { setIncidents(i) });
+          };
+
         refreshIncidents();
         const intervalId = setInterval(refreshIncidents, updateInterval);
         return () => clearInterval(intervalId);
-    }, [incidents]);
+    }, [startDate, endDate, updateInterval]);
 
     return <div className="map-root">
         <IncidentList incidents={incidents} />
