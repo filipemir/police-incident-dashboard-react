@@ -5,14 +5,15 @@ import { Map, TileLayer, GeoJSON } from 'react-leaflet'
 import IncidentList from "../List"
 
 import './styles.scss';
-import {getIncidents, codeGroupScale} from "../../client";
+import {getIncidents} from "../../utils/client";
+import {codeGroupScale} from "../../utils/codeGroups";
 
 const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
     TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
 
 function getIncidentMarker(incident, latLng) {
     const cg = incident.properties['OFFENSE_CODE_GROUP'];
-    if (incident.properties['SHOOTING'] == 'Y') {
+    if (incident.properties['SHOOTING'] === 'Y') {
         return leaflet.marker(latLng, {icon: leaflet.divIcon({className: 'incident-marker'})});
     } else {
         return leaflet.circleMarker(latLng, {

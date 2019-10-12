@@ -4,4 +4,12 @@
   padding: 1rem;
   max-height: 250px;
   overflow: scroll;
+
+  .incident-dot {
+    border-radius: 50%;
+    display: inline-block;
+    width: .75em;
+    height: .75em;
+    margin-right: 1em;
+  }
 }
