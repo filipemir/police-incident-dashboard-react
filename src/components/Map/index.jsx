@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import leaflet from "leaflet";
-import hash from 'object-hash';
+import * as leaflet from "leaflet";
 import { Map, TileLayer, GeoJSON } from 'react-leaflet'
-import IncidentList from "../List"
+// import IncidentList from "../List"
 
 import './styles.scss';
 import {getIncidents} from "../../utils/client";
@@ -53,11 +52,12 @@ export default function IncidentMap({ latLong, startDate, endDate, updateInterva
         return () => clearInterval(intervalId);
     }, [startDate, endDate, updateInterval]);
 
+    // Commenting out the incident list for now list for performance reasons:
     return <div className="map-root">
-        <IncidentList incidents={incidents} />
+        {/*<IncidentList incidents={incidents} />*/}
         <Map center={latLong} zoom={13}>
             <TileLayer url={TILE_LAYER_URL} attribution={TILE_LAYER_ATTRIBUTION} />
-            <GeoJSON key={hash(incidents)} data={incidents} pointToLayer={getIncidentMarker} onEachFeature={bindIncidentPopup}/>
+            <GeoJSON key={Math.random()} data={incidents} pointToLayer={getIncidentMarker} onEachFeature={bindIncidentPopup}/>
         </Map>
     </div>;
 }
