@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as leaflet from "leaflet";
 import { Map, TileLayer, GeoJSON } from 'react-leaflet'
-// import IncidentList from "../List"
 
 import './styles.scss';
-import {getIncidents} from "../../utils/client";
 import {codeGroupScale} from "../../utils/codeGroups";
 
 const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-    TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+    TILE_LAYER_ATTRIBUTION = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    BOS_LAT_LONG = [42.32390487760298, -71.07416152954103],
+    BOS_LIMITS = [[42.39351800, -71.00516847],  [42.24042076, -71.16843346]];
 
 function getIncidentMarker(incident, latLng) {
     const cg = incident.properties['OFFENSE_CODE_GROUP'];
@@ -39,23 +39,11 @@ function bindIncidentPopup(feature, layer) {
  * @returns React component
  * @constructor
  */
-export default function IncidentMap({ latLong, startDate, endDate, updateInterval = 60000 }) {
-    const [incidents, setIncidents] = useState([]);
-
-    useEffect(() => {
-        const refreshIncidents = () => {
-              getIncidents({ startDate, endDate }).then(i => { setIncidents(i) });
-          };
-
-        refreshIncidents();
-        const intervalId = setInterval(refreshIncidents, updateInterval);
-        return () => clearInterval(intervalId);
-    }, [startDate, endDate, updateInterval]);
-
+export default function IncidentMap({ incidents }) {
     // Commenting out the incident list for now list for performance reasons:
     return <div className="map-root">
         {/*<IncidentList incidents={incidents} />*/}
-        <Map center={latLong} zoom={13}>
+        <Map center={BOS_LAT_LONG} bounds={BOS_LIMITS}>
             <TileLayer url={TILE_LAYER_URL} attribution={TILE_LAYER_ATTRIBUTION} />
             <GeoJSON key={Math.random()} data={incidents} pointToLayer={getIncidentMarker} onEachFeature={bindIncidentPopup}/>
         </Map>
