@@ -4,7 +4,7 @@ import isEqual from "lodash/isEqual";
 import "./styles.scss";
 import { TIMEFRAMES } from "../../constants/timeframes";
 
-export default function Controls({ timeframe, endDate, onChange }) {
+export default function Controls({ timeframe, endDate, onChange, incidentGroups }) {
   const timeframeIndex = TIMEFRAMES.findIndex(t => isEqual(t, timeframe));
 
   return <div className={"map-controls"}>
@@ -17,5 +17,9 @@ export default function Controls({ timeframe, endDate, onChange }) {
         })}
       </select>
     </div>
+
+    <div>{incidentGroups.map(group => {
+      return <div>{group.name} ({group.count})</div>
+    })}</div>
   </div>
 }

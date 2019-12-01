@@ -7,6 +7,7 @@ import './styles/global.scss';
 import {ONE_DAY} from "./constants/timeframes";
 import {getTimeframeDates} from "./utils/timeframes";
 import {getIncidents} from "./utils/client";
+import {filterIncidents, getIncidentGroups} from "./utils/codeGroups";
 
 // TODO: End date should be the present but BPD hasn't been updating their data while they work on
 // switching something or other about their systems, so for now we have to work with stale data
@@ -15,18 +16,21 @@ const END_DATE = moment("2019-09-20");
 export default function App() {
   const [timeframe, setTimeframe] = useState(ONE_DAY),
     [{ endDate }, setDates] = useState({ endDate: END_DATE }),
-    [incidents, setIncidents] = useState([]);
+    [incidentGroups, setIncidentGroups] = useState(),
+    [incidentMap, setIncidentMap] = useState({});
 
   useEffect(() => {
       const { startDate, endDate } = getTimeframeDates({ timeframe, endDate: END_DATE }),
         refreshIncidents = () => {
-            getIncidents({ startDate, endDate }).then(i => { setIncidents(i) });
+            getIncidents({ startDate, endDate }).then(i => {
+              setIncidentMap(i)
+            });
         };
 
       // Update dates in state:
       setDates({ startDate, endDate });
 
-      // Refresh incidents in map
+      // Refresh incidents in map:
       refreshIncidents();
 
       // Reset incidents periodically so new ones show up:
@@ -35,7 +39,7 @@ export default function App() {
   }, [timeframe]);
 
   return <div id="app-root">
-      <Controls timeframe={timeframe} endDate={endDate} onChange={setTimeframe} />
-      <Map incidents={incidents} />
+      <Controls incidentGroups={getIncidentGroups({ incidentMap })} timeframe={timeframe} endDate={endDate} onChange={setTimeframe} />
+      <Map incidents={filterIncidents({ incidentMap })} />
   </div>;
 }
