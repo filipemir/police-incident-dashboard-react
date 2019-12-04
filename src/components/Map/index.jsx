@@ -1,4 +1,5 @@
 import React from 'react';
+import geojson from  "geojson";
 import * as leaflet from "leaflet";
 import { Map, TileLayer, GeoJSON } from 'react-leaflet'
 
@@ -32,20 +33,18 @@ function bindIncidentPopup(feature, layer) {
 }
 
 /**
- * @param {[number, number]} latLong - Lat/Long for where the map should be centered when loaded
- * @param {moment} startDate - The start date/time for incidents to be mapped
- * @param {moment} endDate - The end date/time for the incidents to be mapped
- * @param {number} [updateInterval=60000] Number of milliseconds between data refreshes
  * @returns React component
  * @constructor
  */
 export default function IncidentMap({ incidents }) {
+    const geojsonData = geojson.parse(incidents, {Point: ['Lat', 'Long']});
+
     // Commenting out the incident list for now list for performance reasons:
     return <div className="map-root">
         {/*<IncidentList incidents={incidents} />*/}
         <Map center={BOS_LAT_LONG} bounds={BOS_LIMITS}>
             <TileLayer url={TILE_LAYER_URL} attribution={TILE_LAYER_ATTRIBUTION} />
-            <GeoJSON key={Math.random()} data={incidents} pointToLayer={getIncidentMarker} onEachFeature={bindIncidentPopup}/>
+            <GeoJSON key={Math.random()} data={geojsonData} pointToLayer={getIncidentMarker} onEachFeature={bindIncidentPopup}/>
         </Map>
     </div>;
 }

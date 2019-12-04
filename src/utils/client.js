@@ -1,11 +1,10 @@
-import geojson from "geojson";
 import incidentGroups from "../static/incident-groups.json"
 
 const BASE_SQL_QUERY_URL = `https://cors-anywhere.herokuapp.com/https://data.boston.gov/api/3/action/datastore_search_sql?sql=`,
   DATE_FORMAT = 'YYYY-MM-DD hh:mm';
 
 /**
- * Returns an object mapping offense code groups to collections of geoJSON objects representing incidents
+ * Returns an object mapping offense code groups to arrays of incidents
  *
  * @param startDate - moment date
  * @param endDate - moment date
@@ -30,11 +29,6 @@ export async function getIncidents({ startDate, endDate }) {
 
        recordsByGroup[group].push(r);
     });
-
-    // Convert each group to a geojson feature collection:
-    for (const group in recordsByGroup) {
-      recordsByGroup[group] = geojson.parse(recordsByGroup[group], {Point: ['Lat', 'Long']})
-    }
 
     return recordsByGroup;
 }

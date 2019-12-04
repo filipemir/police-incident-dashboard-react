@@ -7,19 +7,15 @@ import {CODE_GROUPS} from "../constants/codeGroups";
  */
 export const codeGroupScale = scaleOrdinal(schemeSet3).domain(CODE_GROUPS);
 
-export function filterIncidents({ incidentMap, incidentGroups }) {
-  return Object.values(incidentMap).flatMap(i => i);
+export function filterIncidents({ incidentsByGroup, incidentGroups }) {
+  return Object.values(incidentsByGroup).flatMap(i => i);
 }
 
-export function getIncidentGroups({ incidentMap }) {
+export function getIncidentGroups({ incidentsByGroup }) {
   const counts = [];
 
-  Object.keys(incidentMap).forEach(group => {
-    const features = incidentMap[group].features;
-    counts.push({
-      name: group,
-      count: features.length
-    })
+  Object.entries(incidentsByGroup).forEach(([group, incidents]) => {
+    counts.push({ name: group, count: incidents.length })
   });
 
   counts.sort((a, b) => {
