@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from "moment";
 
 import Map from "./components/Map";
-import Controls from "./components/Controls";
+import Menu from "./components/Menu";
 import './styles/global.scss';
 import {ONE_DAY} from "./constants/timeframes";
 import {getTimeframeDates} from "./utils/timeframes";
@@ -40,7 +40,7 @@ export default function App() {
   }, [timeframe, dispatchIncidentsAction]);
 
   return <div id="app-root">
-      <Controls incidentsByGroup={incidentsByGroup} visibleGroups={visibleGroups} timeframe={timeframe} endDate={endDate} onTimeframeChange={setTimeframe}
+      <Menu incidentsByGroup={incidentsByGroup} visibleGroups={visibleGroups} timeframe={timeframe} endDate={endDate} onTimeframeChange={setTimeframe}
                 onGroupToggled={group => dispatchIncidentsAction({ type: TOGGLE_INCIDENT_GROUP, payload: { group } }) }/>
       <Map incidents={visibleIncidents} />
   </div>;

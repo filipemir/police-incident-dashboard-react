@@ -1,6 +1,6 @@
 import incidentGroups from "../static/incident-groups.json"
 
-const BASE_SQL_QUERY_URL = `https://cors-anywhere.herokuapp.com/https://data.boston.gov/api/3/action/datastore_search_sql?sql=`,
+const BASE_SQL_QUERY_URL = `https://data.boston.gov/api/3/action/datastore_search_sql?sql=`,
   DATE_FORMAT = 'YYYY-MM-DD hh:mm';
 
 /**
@@ -22,12 +22,21 @@ export async function getIncidents({ startDate, endDate }) {
     // Group records:
     const recordsByGroup = {};
     json.result.records.forEach(r => {
+
       const code = parseInt(r["OFFENSE_CODE"], 10),
-        group = incidentGroups[code].GROUP;
+        group = incidentGroups[code];
 
-      !recordsByGroup[group] && (recordsByGroup[group] = []);
+      if (!group) {
+        // TODO: Report these somewhere, instead of just logging them
+        console.log(`Incident with unknown group code found: ${group}. Assigning to "Other"`);
+        console.log(r);
+      }
 
-       recordsByGroup[group].push(r);
+      const groupName = group ? group.GROUP : "Other";
+
+      !recordsByGroup[groupName] && (recordsByGroup[groupName] = []);
+
+       recordsByGroup[groupName].push(r);
     });
 
     return recordsByGroup;
