@@ -5,6 +5,18 @@
 
   .timeframe-picker__note {
     margin-top: 5px;
-    line-height: 1em;
+  }
+
+  .react-select__control,
+  .react-select__value-container,
+  .react-select__single-value,
+  .react-select__menu {
+    background-color: #424150;
+    color: #fefffe;
+  }
+
+  .react-select__menu {
+    background-color: #33323c;
+    color: #fefffe;
   }
 }

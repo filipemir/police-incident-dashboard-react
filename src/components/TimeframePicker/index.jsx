@@ -15,9 +15,26 @@ export default function TimeframePicker({ timeframe, endDate, onTimeframeChange 
   return <div className={"timeframe-picker"}>
       <Select
         className={"timeframe-picker__selector"}
+        classNamePrefix={"react-select"}
         value={options[timeframeIndex]}
         onChange={t => onTimeframeChange(t.value)}
         options={options}
+        theme={theme => ({
+          ...theme,
+          borderRadius: 0,
+          colors: {
+            ...theme.colors,
+            primary: '#fefffe',
+            primary75: '#1086ff',
+            primary25: '#1086ff',
+            neutral0: '#33323c'
+          },
+          spacing: {
+            ...theme.spacing,
+            menuGutter: 0,
+            controlHeight: 30
+          }
+        })}
       />
       <div className={"timeframe-picker__note"}>Sadly, for now this is actually ending on {`${endDate.format("MM-DD-YY")}`} because the data stopped flowing after that</div>
     </div>;
