@@ -3,4 +3,20 @@
       display: block;
     }
 
+    .input-group__circle {
+      $diameter: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      width: $diameter;
+      height: $diameter;
+      opacity: .75;
+      position: relative;
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    .input-group__count {
+      margin-left: 0.5em;
+      color: darken(#fefffe, 20%);
+    }
 }

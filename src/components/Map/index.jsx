@@ -13,17 +13,13 @@ const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r
 
 function getIncidentMarker(incident, latLng) {
     const cg = incident.properties['OFFENSE_CODE_GROUP'];
-    if (incident.properties['SHOOTING'] === 'Y') {
-        return leaflet.marker(latLng, {icon: leaflet.divIcon({className: 'incident-marker'})});
-    } else {
-        return leaflet.circleMarker(latLng, {
-            radius: 4,
-            color: codeGroupScale(cg),
-            weight: 1,
-            opacity: 0.5,
-            fillOpacity: 0.25
-        });
-    }
+    return leaflet.circleMarker(latLng, {
+        radius: 4,
+        color: codeGroupScale(cg),
+        weight: 1,
+        opacity: 0.5,
+        fillOpacity: 0.25
+    });
 }
 
 function bindIncidentPopup(feature, layer) {
