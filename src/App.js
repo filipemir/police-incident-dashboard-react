@@ -41,8 +41,14 @@ export default function App() {
   }, [timeframe, dispatchIncidentsAction]);
 
   return <div id="app-root">
-      <Menu incidentsByGroup={incidentsByGroup} visibleGroups={visibleGroups} timeframe={timeframe} endDate={endDate} onTimeframeChange={setTimeframe}
-                onGroupToggled={group => dispatchIncidentsAction({ type: TOGGLE_INCIDENT_GROUP, payload: { group } }) }/>
+      <Menu
+        incidentsByGroup={incidentsByGroup}
+        visibleGroups={visibleGroups}
+        timeframe={timeframe}
+        endDate={endDate}
+        onTimeframeChange={setTimeframe}
+        onGroupToggled={group => dispatchIncidentsAction({ type: TOGGLE_INCIDENT_GROUP, payload: { group } }) }
+      />
       <Map incidents={visibleIncidents} />
   </div>;
 }

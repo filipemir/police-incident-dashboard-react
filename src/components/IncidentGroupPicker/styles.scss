@@ -1,6 +1,19 @@
+@import '../../styles/vars.scss';
+
 .incident-group-picker {
+    overflow: hidden;
+    transition: height 500ms ease-in-out;
+
     .group-checkbox{
       display: block;
+      cursor: pointer;
+      padding: 2px;
+      border-radius: 6px;
+      position: relative;
+
+      &:hover {
+        background-color: $gray3;
+      }
     }
 
     .input-group__circle {
@@ -17,6 +30,31 @@
 
     .input-group__count {
       margin-left: 0.5em;
-      color: darken(#fefffe, 20%);
+      color: darken($white, 20%);
+    }
+
+  .incident-group-bulk-actions {
+    display: flex;
+  }
+  .incident-group-bulk-action,
+  .incident-group-expander {
+    background-color: $gray3;
+    text-align: center;
+    padding: 7px;
+    margin-top: 3px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+    .incident-group-bulk-action {
+      flex-grow: 1;
+
+      &:not(:first-of-type) {
+        margin-left: 3px;
+      }
+    }
+
+    .incident-group-expander {
+
     }
 }
