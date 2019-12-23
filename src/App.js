@@ -6,8 +6,8 @@ import Menu from './components/Menu';
 import './styles/global.scss';
 import { ONE_DAY } from './constants/timeframes';
 import { getTimeframeDates } from './utils/timeframes';
-// import {getIncidents} from "./utils/client";
-import { getIncidents } from './mocks/client';
+import { getIncidents } from './utils/client';
+// import { getIncidents } from './mocks/client';
 import useIncidentsReducer, {
     hideAllIncidentGroups,
     loadIncidents,
@@ -21,10 +21,14 @@ const END_DATE = moment('2019-09-20');
 
 export default function App() {
     const [timeframe, setTimeframe] = useState(ONE_DAY),
-        [dates, setDates] = useState({ endDate: END_DATE }),
-        { endDate } = dates,
+        [dates, setDates] = useState(
+            getTimeframeDates({
+                timeframe,
+                endDate: END_DATE
+            })
+        ),
         [incidentsState, dispatchIncidentsAction] = useIncidentsReducer(),
-        { incidentsByGroup, visibleGroups, visibleIncidents } = incidentsState;
+        { incidentsByGroup, visibleGroups, visibleIncidents, incidentCount } = incidentsState;
 
     useEffect(() => {
         const { startDate, endDate } = getTimeframeDates({
@@ -51,10 +55,11 @@ export default function App() {
     return (
         <div id='app-root'>
             <Menu
+                incidentCount={incidentCount}
                 incidentsByGroup={incidentsByGroup}
                 visibleGroups={visibleGroups}
                 timeframe={timeframe}
-                endDate={endDate}
+                dates={dates}
                 onTimeframeChange={setTimeframe}
                 onGroupToggled={group => dispatchIncidentsAction(toggleIncidentGroup(group))}
                 onShowAllGroups={() => dispatchIncidentsAction(showAllIncidentGroups())}

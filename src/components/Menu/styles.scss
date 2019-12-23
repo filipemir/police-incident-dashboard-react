@@ -3,7 +3,7 @@
 .menu-root {
     position: fixed;
     z-index: 1;
-    box-shadow: 0 0 10px -2px rgba(0,0,0,.25);
+    box-shadow: 0 0 10px -2px rgba(0, 0, 0, 0.25);
     height: 100%;
     background-color: $gray2;
     color: $white;
@@ -27,7 +27,21 @@
     }
 
     .menu-content {
+    }
 
+    .menu-dates {
+        margin-left: 1em;
+        font-weight: 100;
+        font-size: 0.8em;
+    }
+
+    .menu-loader {
+        padding: 1em 0;
+        text-align: center;
+
+        > div {
+            margin: 0 auto;
+        }
     }
 
     .menu-section {
@@ -40,6 +54,6 @@
         margin-bottom: 4px;
         font-weight: 700;
         font-size: 1em;
-
+        display: inline-block;
     }
 }

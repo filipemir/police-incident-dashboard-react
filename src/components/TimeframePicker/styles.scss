@@ -1,29 +1,25 @@
 @import '../../styles/vars.scss';
 
 .timeframe-picker {
-  .timeframe-picker__selector {
-    width: 100%;
-  }
+    .timeframe-picker__selector {
+        width: 100%;
+    }
 
-  .timeframe-picker__note {
-    margin-top: 5px;
-  }
+    .react-select__control {
+        border: none !important;
+        border-radius: 6px;
+    }
 
-  .react-select__control {
-    border: none !important;
-    border-radius: 6px;
-  }
+    .react-select__control,
+    .react-select__value-container,
+    .react-select__single-value,
+    .react-select__menu {
+        background-color: $gray3;
+        color: $white;
+    }
 
-  .react-select__control,
-  .react-select__value-container,
-  .react-select__single-value,
-  .react-select__menu {
-    background-color: $gray3;
-    color: $white;
-  }
-
-  .react-select__menu {
-    background-color: $gray3;
-    color: white;
-  }
+    .react-select__menu {
+        background-color: $gray3;
+        color: white;
+    }
 }

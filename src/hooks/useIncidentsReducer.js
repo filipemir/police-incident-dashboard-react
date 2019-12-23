@@ -3,7 +3,11 @@ import { useReducer } from 'react';
 const initialState = {
     incidentsByGroup: {},
     visibleGroups: new Set(),
-    visibleIncidents: []
+    visibleIncidents: [],
+    incidentCount: {
+        total: 0,
+        visible: 0
+    }
 };
 
 const LOAD_INCIDENTS = 'load-incidents';
@@ -21,6 +25,19 @@ function getVisibleIncidents({ incidentsByGroup, visibleGroups }) {
     return visibleIncidents;
 }
 
+function getIncidentCount({ incidentsByGroup, visibleGroups }) {
+    let total = 0,
+        visible = 0;
+
+    Object.entries(incidentsByGroup).forEach(([group, incidents]) => {
+        const count = incidents.length;
+        total += count;
+        visibleGroups.has(group) && (visible += count);
+    });
+
+    return { total, visible };
+}
+
 function reduceLoadIncidents(state, payload) {
     const { incidentsByGroup } = payload;
     let { visibleGroups } = state;
@@ -33,7 +50,8 @@ function reduceLoadIncidents(state, payload) {
         ...state,
         incidentsByGroup,
         visibleGroups,
-        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups })
+        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups }),
+        incidentCount: getIncidentCount({ incidentsByGroup, visibleGroups })
     };
 }
 
@@ -46,7 +64,8 @@ function reduceToggleIncidentGroup(state, payload) {
     return {
         ...state,
         visibleGroups,
-        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups })
+        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups }),
+        incidentCount: getIncidentCount({ incidentsByGroup, visibleGroups })
     };
 }
 
@@ -57,7 +76,8 @@ function reduceShowAllIncidentGroups(state) {
     return {
         ...state,
         visibleGroups,
-        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups })
+        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups }),
+        incidentCount: getIncidentCount({ incidentsByGroup, visibleGroups })
     };
 }
 
@@ -68,7 +88,8 @@ function reduceHideAllIncidentGroups(state) {
     return {
         ...state,
         visibleGroups,
-        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups })
+        visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups }),
+        incidentCount: getIncidentCount({ incidentsByGroup, visibleGroups })
     };
 }
 
