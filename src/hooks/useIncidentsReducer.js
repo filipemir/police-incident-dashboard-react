@@ -6,8 +6,10 @@ const initialState = {
   visibleIncidents: []
 };
 
-export const LOAD_INCIDENTS = "load-incidents";
-export const TOGGLE_INCIDENT_GROUP = "toggle-group";
+const LOAD_INCIDENTS = "load-incidents";
+const TOGGLE_INCIDENT_GROUP = "toggle-group";
+const HIDE_ALL_GROUPS = "hide-all-groups";
+const SHOW_ALL_GROUPS = "show-all-groups";
 
 function getVisibleIncidents({ incidentsByGroup, visibleGroups }) {
   const visibleIncidents = [];
@@ -19,39 +21,55 @@ function getVisibleIncidents({ incidentsByGroup, visibleGroups }) {
   return visibleIncidents;
 }
 
+function reduceLoadIncidents(state, payload) {
+  const { incidentsByGroup } = payload;
+  let { visibleGroups } = state;
+
+  if (state.visibleGroups.size === 0) {
+    visibleGroups = new Set(Object.keys(incidentsByGroup));
+  }
+
+  return {
+    ...state,
+    incidentsByGroup,
+    visibleGroups,
+    visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups })
+  };
+}
+
+function reduceToggleIncidentGroup(state, payload) {
+  const {group} = payload,
+    {incidentsByGroup, visibleGroups} = state;
+
+  visibleGroups.has(group) ? visibleGroups.delete(group) : visibleGroups.add(group);
+
+  return {
+    ...state,
+    visibleGroups,
+    visibleIncidents: getVisibleIncidents({incidentsByGroup, visibleGroups})
+  };
+}
+
 function incidentsReducer(state, action) {
   const { type, payload } = action;
 
-  if (type === LOAD_INCIDENTS) {
-    const { incidentsByGroup } = payload;
-    let { visibleGroups } = state;
-
-    if (state.visibleGroups.size === 0) {
-      visibleGroups = new Set(Object.keys(incidentsByGroup));
-    }
-
-    return {
-      ...state,
-      incidentsByGroup,
-      visibleGroups,
-      visibleIncidents: getVisibleIncidents({ incidentsByGroup, visibleGroups })
-    };
+  switch (type) {
+    case LOAD_INCIDENTS:
+      return reduceLoadIncidents(state, payload);
+    case TOGGLE_INCIDENT_GROUP:
+      return reduceToggleIncidentGroup(state, payload);
+    default:
+      throw Error(`Invalid incidents reducer action: ${type}`)
   }
+}
 
-  if (type === TOGGLE_INCIDENT_GROUP) {
-    const {group} = payload,
-      {incidentsByGroup, visibleGroups} = state;
+// Action factories
+export function loadIncidents(incidentsByGroup) {
+  return { type: LOAD_INCIDENTS, payload: { incidentsByGroup }}
+}
 
-    visibleGroups.has(group) ? visibleGroups.delete(group) : visibleGroups.add(group);
-
-    return {
-      ...state,
-      visibleGroups,
-      visibleIncidents: getVisibleIncidents({incidentsByGroup, visibleGroups})
-    };
-  }
-
-  throw Error(`Invalid incidents reducer action: ${type}`)
+export function toggleIncidentGroup(group) {
+  return ({ type: TOGGLE_INCIDENT_GROUP, payload: { group } })
 }
 
 export default function useIncidentsReducer() {

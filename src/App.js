@@ -8,7 +8,10 @@ import {ONE_DAY} from "./constants/timeframes";
 import {getTimeframeDates} from "./utils/timeframes";
 // import {getIncidents} from "./utils/client";
 import {getIncidents} from "./mocks/client";
-import useIncidentsReducer, {LOAD_INCIDENTS, TOGGLE_INCIDENT_GROUP} from "./hooks/useIncidentsReducer";
+import useIncidentsReducer, {
+  loadIncidents,
+  toggleIncidentGroup
+} from "./hooks/useIncidentsReducer";
 
 // TODO: End date should be the present but BPD hasn't been updating their data while they work on
 // switching something or other about their systems, so for now we have to work with stale data
@@ -25,7 +28,7 @@ export default function App() {
       const { startDate, endDate } = getTimeframeDates({ timeframe, endDate: END_DATE }),
         refreshIncidents = () => {
             getIncidents({ startDate, endDate }).then(incidentsByGroup => {
-              dispatchIncidentsAction({ type: LOAD_INCIDENTS, payload: { incidentsByGroup }})
+              dispatchIncidentsAction(loadIncidents(incidentsByGroup))
             });
         };
 
@@ -47,7 +50,7 @@ export default function App() {
         timeframe={timeframe}
         endDate={endDate}
         onTimeframeChange={setTimeframe}
-        onGroupToggled={group => dispatchIncidentsAction({ type: TOGGLE_INCIDENT_GROUP, payload: { group } }) }
+        onGroupToggled={group => dispatchIncidentsAction(toggleIncidentGroup(group)) }
       />
       <Map incidents={visibleIncidents} />
   </div>;
