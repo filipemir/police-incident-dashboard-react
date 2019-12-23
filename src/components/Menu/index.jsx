@@ -6,6 +6,7 @@ import TimeframePicker from '../TimeframePicker';
 import IncidentGroupPicker from '../IncidentGroupPicker';
 
 export default function Menu({
+    isLoadingIncidents,
     incidentCount,
     timeframe,
     dates,
@@ -32,16 +33,16 @@ export default function Menu({
                 <div className={'menu-section'}>
                     <h2 className={'menu-section-title'}>Date Range</h2>
                     <span className={'menu-dates'}>{`${startDate.format(
-                        startDate.year === endDate.year ? 'MMM D' : 'MMM D YYYY'
-                    )} – ${endDate.format('MMM D YYYY')}`}</span>
+                        startDate.year === endDate.year ? 'MMM D' : 'MMM D, YYYY'
+                    )} – ${endDate.format('MMM D, YYYY')}`}</span>
                     <TimeframePicker timeframe={timeframe} dates={dates} onTimeframeChange={onTimeframeChange} />
                 </div>
-                {!hasIncidents && (
+                {isLoadingIncidents && (
                     <div className={'menu-loader'}>
                         <BarLoader size={50} color={'#98ff98'} loading={true} />
                     </div>
                 )}
-                {hasIncidents && (
+                {!isLoadingIncidents && hasIncidents && (
                     <>
                         <div className={'menu-section'}>
                             <div>{`Showing ${

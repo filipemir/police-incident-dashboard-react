@@ -20,7 +20,8 @@ import useIncidentsReducer, {
 const END_DATE = moment('2019-09-20');
 
 export default function App() {
-    const [timeframe, setTimeframe] = useState(ONE_DAY),
+    const [loading, setLoading] = useState(true),
+        [timeframe, setTimeframe] = useState(ONE_DAY),
         [dates, setDates] = useState(
             getTimeframeDates({
                 timeframe,
@@ -36,8 +37,10 @@ export default function App() {
                 endDate: END_DATE
             }),
             refreshIncidents = () => {
+                setLoading(true);
                 getIncidents({ startDate, endDate }).then(incidentsByGroup => {
                     dispatchIncidentsAction(loadIncidents(incidentsByGroup));
+                    setLoading(false);
                 });
             };
 
@@ -55,6 +58,7 @@ export default function App() {
     return (
         <div id='app-root'>
             <Menu
+                isLoadingIncidents={loading}
                 incidentCount={incidentCount}
                 incidentsByGroup={incidentsByGroup}
                 visibleGroups={visibleGroups}
