@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/police-incident-dashboard-react/precache-manifest.1fb82d4da5d6fd33f87b6fdd150c340e.js"
+  "/police-incident-dashboard-react/precache-manifest.2968f1eb7674aa546dcb6b048195cb2f.js"
 );
 
 self.addEventListener('message', (event) => {
