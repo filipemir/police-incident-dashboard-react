@@ -4,72 +4,71 @@
     overflow: hidden;
     transition: height 500ms ease-in-out;
 
-    .group-checkbox{
-      display: block;
-      cursor: pointer;
-      padding: 2px;
-      border-radius: 6px;
-      position: relative;
+    .group-checkbox {
+        display: block;
+        cursor: pointer;
+        padding: 2px 5px;
+        border-radius: 6px;
+        position: relative;
 
-      input {
-        display: none;
-      }
-
-      &:hover {
-        background-color: $gray3;
-      }
-
-      &.inactive {
-        .input-group__count,
-        .input-group__name {
-          color: $gray1;
+        input {
+            display: none;
         }
-        .input-group__name {
-          text-decoration: line-through;
+
+        &:hover {
+            background-color: $gray3;
         }
-      }
+
+        &.inactive {
+            .input-group__count,
+            .input-group__name {
+                color: $gray1;
+            }
+            .input-group__name {
+                text-decoration: line-through;
+            }
+        }
     }
 
     .input-group__circle {
-      $diameter: 8px;
-      border-radius: 50%;
-      display: inline-block;
-      width: $diameter;
-      height: $diameter;
-      opacity: .75;
-      position: relative;
-      border-style: solid;
-      border-width: 1px;
-      margin-right: 0.5em;
+        $diameter: 8px;
+        border-radius: 50%;
+        display: inline-block;
+        width: $diameter;
+        height: $diameter;
+        opacity: 0.75;
+        position: relative;
+        border-style: solid;
+        border-width: 1px;
+        margin-right: 0.5em;
     }
 
     .input-group__count {
-      margin-left: 0.5em;
-      color: $teal;
+        margin-left: 0.5em;
+        color: $teal;
     }
 
-  .incident-group-bulk-actions {
-    display: flex;
-  }
-  .incident-group-bulk-action,
-  .incident-group-expander {
-    background-color: $gray3;
-    text-align: center;
-    padding: 7px;
-    margin-top: 3px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
+    .incident-group-bulk-actions {
+        display: flex;
+    }
+    .incident-group-bulk-action,
+    .incident-group-expander {
+        background-color: $gray3;
+        text-align: center;
+        padding: 7px;
+        margin-top: 3px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 
     .incident-group-bulk-action {
-      flex-grow: 1;
+        flex-grow: 1;
 
-      &:not(:first-of-type) {
-        margin-left: 3px;
-      }
+        &:not(:first-of-type) {
+            margin-left: 3px;
+        }
     }
 
     .incident-group-expander {
-
     }
 }

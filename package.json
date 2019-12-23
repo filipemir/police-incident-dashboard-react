@@ -7,6 +7,7 @@
     "d3-scale": "3.1.0",
     "d3-scale-chromatic": "1.5.0",
     "geojson": "0.5.0",
+    "hex-to-rgba": "2.0.1",
     "husky": "3.1.0",
     "leaflet": "1.5.1",
     "lint-staged": "9.5.0",
@@ -26,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "prettier": "node_modules/.bin/prettier --write src/**/*.js"
   },
   "eslintConfig": {
     "extends": "react-app"
