@@ -20,7 +20,7 @@ export default function IncidentGroupPicker({  onGroupToggled, incidentsByGroup,
         groups.map((group, i) =>{
           const { name , count } = group,
             isVisible = visibleGroups.has(name);
-          return <label key={`input-group-${i} ${isVisible ? 'active' : ''}`} className={"group-checkbox"}>
+          return <label key={`input-group-${i}`} className={`group-checkbox ${isVisible ? '' : 'inactive'}`}>
             <div
               className={`input-group__circle`}
               style={{
@@ -32,7 +32,7 @@ export default function IncidentGroupPicker({  onGroupToggled, incidentsByGroup,
               setExpanded(true);
               onGroupToggled(name);
             }}/>
-              <span>{name}</span>
+              <span className={"input-group__name"}>{name}</span>
               <span className={"input-group__count"}>{count}</span>
           </label>;
         })

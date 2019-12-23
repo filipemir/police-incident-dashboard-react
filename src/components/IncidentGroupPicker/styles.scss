@@ -11,8 +11,22 @@
       border-radius: 6px;
       position: relative;
 
+      input {
+        display: none;
+      }
+
       &:hover {
         background-color: $gray3;
+      }
+
+      &.inactive {
+        .input-group__count,
+        .input-group__name {
+          color: $gray1;
+        }
+        .input-group__name {
+          text-decoration: line-through;
+        }
       }
     }
 
@@ -26,11 +40,12 @@
       position: relative;
       border-style: solid;
       border-width: 1px;
+      margin-right: 0.5em;
     }
 
     .input-group__count {
       margin-left: 0.5em;
-      color: darken($white, 20%);
+      color: $teal;
     }
 
   .incident-group-bulk-actions {
