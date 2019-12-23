@@ -1,6 +1,6 @@
-import moment from "moment";
+import moment from 'moment';
 
 export function getTimeframeDates({ timeframe, endDate = moment() }) {
-  const { value, unit } = timeframe;
-  return { startDate: moment(endDate).subtract(value, unit), endDate };
+    const { value, unit } = timeframe;
+    return { startDate: moment(endDate).subtract(value, unit), endDate };
 }
