@@ -52,7 +52,7 @@ function reduceToggleIncidentGroup(state, payload) {
 
 function reduceShowAllIncidentGroups(state) {
   const {incidentsByGroup} = state,
-    visibleGroups = new Set();
+    visibleGroups = new Set(Object.keys(incidentsByGroup));
 
   return {
     ...state,
