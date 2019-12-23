@@ -6,7 +6,7 @@ import {codeGroupScale} from "../../utils/codeGroups";
 
 const COLLAPSED_NUM = 5;
 
-export default function IncidentGroupPicker({  onGroupToggled, incidentsByGroup, visibleGroups }) {
+export default function IncidentGroupPicker({  onGroupToggled, incidentsByGroup, visibleGroups, onShowAllGroups, onHideAllGroups }) {
   const [isExpanded, setExpanded] = useState(false);
   let groups = getIncidentGroups({ incidentsByGroup }),
     totalGroups = groups.length;
@@ -38,10 +38,10 @@ export default function IncidentGroupPicker({  onGroupToggled, incidentsByGroup,
         })
       }
     {isExpanded && <div className={"incident-group-bulk-actions"}>
-      <div className={"incident-group-bulk-action"} onClick={() => {}}>
+      <div className={"incident-group-bulk-action"} onClick={() => onShowAllGroups()}>
         <span>Select All</span>
       </div>
-        <div className={"incident-group-bulk-action"} onClick={() => {}}>
+        <div className={"incident-group-bulk-action"} onClick={() => onHideAllGroups()}>
         <span>Unselect All</span>
       </div>
     </div>}

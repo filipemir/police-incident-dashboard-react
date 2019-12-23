@@ -50,6 +50,28 @@ function reduceToggleIncidentGroup(state, payload) {
   };
 }
 
+function reduceShowAllIncidentGroups(state) {
+  const {incidentsByGroup} = state,
+    visibleGroups = new Set();
+
+  return {
+    ...state,
+    visibleGroups,
+    visibleIncidents: getVisibleIncidents({incidentsByGroup, visibleGroups})
+  };
+}
+
+function reduceHideAllIncidentGroups(state) {
+  const {incidentsByGroup} = state,
+    visibleGroups = new Set();
+
+  return {
+    ...state,
+    visibleGroups,
+    visibleIncidents: getVisibleIncidents({incidentsByGroup, visibleGroups})
+  };
+}
+
 function incidentsReducer(state, action) {
   const { type, payload } = action;
 
@@ -58,6 +80,10 @@ function incidentsReducer(state, action) {
       return reduceLoadIncidents(state, payload);
     case TOGGLE_INCIDENT_GROUP:
       return reduceToggleIncidentGroup(state, payload);
+    case SHOW_ALL_GROUPS:
+      return reduceShowAllIncidentGroups(state);
+    case HIDE_ALL_GROUPS:
+      return reduceHideAllIncidentGroups(state);
     default:
       throw Error(`Invalid incidents reducer action: ${type}`)
   }
@@ -70,6 +96,14 @@ export function loadIncidents(incidentsByGroup) {
 
 export function toggleIncidentGroup(group) {
   return ({ type: TOGGLE_INCIDENT_GROUP, payload: { group } })
+}
+
+export function showAllIncidentGroups() {
+  return ({ type: SHOW_ALL_GROUPS })
+}
+
+export function hideAllIncidentGroups() {
+  return ({ type: HIDE_ALL_GROUPS })
 }
 
 export default function useIncidentsReducer() {

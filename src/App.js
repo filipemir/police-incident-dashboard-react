@@ -9,7 +9,8 @@ import {getTimeframeDates} from "./utils/timeframes";
 // import {getIncidents} from "./utils/client";
 import {getIncidents} from "./mocks/client";
 import useIncidentsReducer, {
-  loadIncidents,
+  hideAllIncidentGroups,
+  loadIncidents, showAllIncidentGroups,
   toggleIncidentGroup
 } from "./hooks/useIncidentsReducer";
 
@@ -51,6 +52,8 @@ export default function App() {
         endDate={endDate}
         onTimeframeChange={setTimeframe}
         onGroupToggled={group => dispatchIncidentsAction(toggleIncidentGroup(group)) }
+        onShowAllGroups={() => dispatchIncidentsAction(showAllIncidentGroups())}
+        onHideAllGroups={() => dispatchIncidentsAction(hideAllIncidentGroups())}
       />
       <Map incidents={visibleIncidents} />
   </div>;

@@ -4,7 +4,7 @@ import "./styles.scss";
 import TimeframePicker from "../TimeframePicker";
 import IncidentGroupPicker from "../IncidentGroupPicker";
 
-export default function Menu({ timeframe, endDate, onTimeframeChange, onGroupToggled, incidentsByGroup, visibleGroups }) {
+export default function Menu({ timeframe, endDate, onTimeframeChange, onGroupToggled, incidentsByGroup, visibleGroups, onShowAllGroups, onHideAllGroups }) {
   return <div className={"menu-root"}>
     <div className={"menu-title"}>
       <h1>Boston <br /> Police Incidents</h1>
@@ -16,7 +16,7 @@ export default function Menu({ timeframe, endDate, onTimeframeChange, onGroupTog
       </div>
       <div className={"menu-section"}>
         <h2 className={"menu-section-title"}>Incident Groups</h2>
-        <IncidentGroupPicker incidentsByGroup={incidentsByGroup} visibleGroups={visibleGroups} onGroupToggled={onGroupToggled} />
+        <IncidentGroupPicker incidentsByGroup={incidentsByGroup} visibleGroups={visibleGroups} onGroupToggled={onGroupToggled} onShowAllGroups={onShowAllGroups} onHideAllGroups={onHideAllGroups}/>
       </div>
     </div>
   </div>
