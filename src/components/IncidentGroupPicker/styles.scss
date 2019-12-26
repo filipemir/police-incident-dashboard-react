@@ -1,8 +1,13 @@
 @import '../../styles/vars.scss';
 
 .incident-group-picker {
-    overflow: hidden;
+    overflow-x: hidden;
     transition: height 500ms ease-in-out;
+
+    .incident-group-picker-groups {
+        overflow-y: scroll;
+        max-height: 27vh;
+    }
 
     .group-checkbox {
         display: block;
@@ -70,5 +75,8 @@
     }
 
     .incident-group-expander {
+    }
+
+    .incident-group-controls {
     }
 }

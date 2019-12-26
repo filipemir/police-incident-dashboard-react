@@ -37,11 +37,17 @@ export default function Menu({
                     )} – ${endDate.format('MMM D, YYYY')}`}</span>
                     <TimeframePicker timeframe={timeframe} dates={dates} onTimeframeChange={onTimeframeChange} />
                 </div>
+
                 {isLoadingIncidents && (
                     <div className={'menu-loader'}>
                         <BarLoader size={50} color={'#98ff98'} loading={true} />
                     </div>
                 )}
+
+                {!isLoadingIncidents && !hasIncidents && (
+                    <span>Oops. We couldn't find any incidents with location data for this date range</span>
+                )}
+
                 {!isLoadingIncidents && hasIncidents && (
                     <>
                         <div className={'menu-section'}>
@@ -61,6 +67,13 @@ export default function Menu({
                         </div>
                     </>
                 )}
+            </div>
+
+            <div className={'menu-footer'}>
+                Made with ♥ by{' '}
+                <a href='https://www.codeforboston.org/' target='_blank'>
+                    Code for Boston
+                </a>
             </div>
         </div>
     );
