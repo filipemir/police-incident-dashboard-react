@@ -26,7 +26,13 @@
         }
     }
 
-    .menu-content {
+    .menu-controls-icon {
+        padding: 10px;
+        cursor: pointer;
+
+        svg {
+            fill: darken($gray3, 5%);
+        }
     }
 
     .menu-dates {
@@ -62,7 +68,6 @@
         position: absolute;
         bottom: 0;
         width: 100%;
-        padding: 10px 0;
         text-align: center;
         font-size: 12px;
 
@@ -71,6 +76,57 @@
             color: $teal;
             text-decoration: none;
             font-weight: 700;
+        }
+    }
+
+    .menu-attribution {
+        padding-bottom: 10px;
+    }
+
+    .menu-collapser {
+        width: 100%;
+        font-size: 15px;
+        margin-bottom: 10px;
+        color: $gray1;
+        text-align: center;
+        font-weight: 700;
+        background-color: $gray3;
+        cursor: pointer;
+
+        span {
+            bottom: 6px;
+            position: relative;
+        }
+    }
+
+    &.collapsed {
+        width: 50px;
+
+        .menu-title {
+            font-size: 8px;
+        }
+
+        .menu-content {
+            display: none;
+        }
+
+        .menu-arrows {
+            svg {
+                transform: unset;
+            }
+        }
+    }
+
+    .menu-arrows {
+        position: relative;
+        bottom: 0;
+        height: 100%;
+        display: inline-block;
+
+        svg {
+            transform: rotate(180deg);
+            fill: $gray1;
+            height: 33px;
         }
     }
 }
