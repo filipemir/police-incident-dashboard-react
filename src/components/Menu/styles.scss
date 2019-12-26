@@ -9,7 +9,7 @@
     color: $white;
     font-size: 0.9em;
     font-weight: 300;
-    max-width: 350px;
+    max-width: 310px;
 
     .menu-title,
     .menu-content {
@@ -31,7 +31,7 @@
         cursor: pointer;
 
         svg {
-            fill: darken($gray3, 5%);
+            fill: $gray4;
         }
     }
 
