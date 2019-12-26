@@ -5,8 +5,6 @@ import './styles.scss';
 import { getIncidentGroups } from '../../utils/codeGroups';
 import { codeGroupScale } from '../../utils/codeGroups';
 
-const COLLAPSED_NUM = 7;
-
 export default function IncidentGroupPicker({
     onGroupToggled,
     incidentsByGroup,
@@ -14,13 +12,7 @@ export default function IncidentGroupPicker({
     onShowAllGroups,
     onHideAllGroups
 }) {
-    const [isExpanded, setExpanded] = useState(false);
-    let groups = getIncidentGroups({ incidentsByGroup }),
-        totalGroups = groups.length;
-
-    if (!isExpanded) {
-        groups = groups.slice(0, COLLAPSED_NUM);
-    }
+    let groups = getIncidentGroups({ incidentsByGroup });
 
     return (
         <div className={'incident-group-picker'}>
@@ -38,14 +30,7 @@ export default function IncidentGroupPicker({
                                     borderColor: isVisible ? hexToRgba(color, 1) : '#d3d3d3'
                                 }}
                             />
-                            <input
-                                type='checkbox'
-                                checked={isVisible}
-                                onChange={() => {
-                                    setExpanded(true);
-                                    onGroupToggled(name);
-                                }}
-                            />
+                            <input type='checkbox' checked={isVisible} onChange={() => onGroupToggled(name)} />
                             <span className={'input-group__name'}>{name}</span>
                             <span className={'input-group__count'}>{count}</span>
                         </label>
@@ -53,18 +38,13 @@ export default function IncidentGroupPicker({
                 })}
             </div>
             <div className={'incident-group-controls'}>
-                {isExpanded && (
-                    <div className={'incident-group-bulk-actions'}>
-                        <div className={'incident-group-bulk-action'} onClick={() => onShowAllGroups()}>
-                            <span>Select All</span>
-                        </div>
-                        <div className={'incident-group-bulk-action'} onClick={() => onHideAllGroups()}>
-                            <span>Unselect All</span>
-                        </div>
+                <div className={'incident-group-bulk-actions'}>
+                    <div className={'incident-group-bulk-action'} onClick={() => onShowAllGroups()}>
+                        <span>Select All</span>
                     </div>
-                )}
-                <div className={'incident-group-expander'} onClick={() => setExpanded(!isExpanded)}>
-                    <span>{isExpanded ? `Collapse` : `${totalGroups - COLLAPSED_NUM} More Groups`}</span>
+                    <div className={'incident-group-bulk-action'} onClick={() => onHideAllGroups()}>
+                        <span>Unselect All</span>
+                    </div>
                 </div>
             </div>
         </div>

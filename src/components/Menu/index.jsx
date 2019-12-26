@@ -37,50 +37,52 @@ export default function Menu({
             </div>
 
             {collapsed && (
-                <div className={'menu-controls-icon'} onClick={() => setCollapsed(false)}>
+                <div className={'menu-content menu-controls-icon'} onClick={() => setCollapsed(false)}>
                     <ReactSVG src={controls} />
                 </div>
             )}
 
-            <div className={'menu-content'}>
-                <div className={'menu-section'}>
-                    <h2 className={'menu-section-title'}>Date Range</h2>
-                    <span className={'menu-dates'}>{`${startDate.format(
-                        startDate.year === endDate.year ? 'MMM D' : 'MMM D, YYYY'
-                    )} – ${endDate.format('MMM D, YYYY')}`}</span>
-                    <TimeframePicker timeframe={timeframe} dates={dates} onTimeframeChange={onTimeframeChange} />
-                </div>
-
-                {isLoadingIncidents && (
-                    <div className={'menu-loader'}>
-                        <BarLoader size={50} color={'#98ff98'} loading={true} />
+            {!collapsed && (
+                <div className={'menu-content'}>
+                    <div className={'menu-section'}>
+                        <h2 className={'menu-section-title'}>Date Range</h2>
+                        <span className={'menu-dates'}>{`${startDate.format(
+                            startDate.year === endDate.year ? 'MMM D' : 'MMM D, YYYY'
+                        )} – ${endDate.format('MMM D, YYYY')}`}</span>
+                        <TimeframePicker timeframe={timeframe} dates={dates} onTimeframeChange={onTimeframeChange} />
                     </div>
-                )}
 
-                {!isLoadingIncidents && !hasIncidents && (
-                    <span>Oops. We couldn't find any incidents with location data for this date range</span>
-                )}
-
-                {!isLoadingIncidents && hasIncidents && (
-                    <>
-                        <div className={'menu-section'}>
-                            <div>{`Showing ${
-                                visible === total ? `all ${total}` : `${visible} out of ${total}`
-                            } incidents`}</div>
+                    {isLoadingIncidents && (
+                        <div className={'menu-loader'}>
+                            <BarLoader size={50} color={'#98ff98'} loading={true} />
                         </div>
-                        <div className={'menu-section'}>
+                    )}
+
+                    {!isLoadingIncidents && !hasIncidents && (
+                        <span>Oops. We couldn't find any incidents with location data for this date range</span>
+                    )}
+
+                    {!isLoadingIncidents && hasIncidents && (
+                        <>
+                            <div className={'menu-section'}>
+                                <div>{`Showing ${
+                                    visible === total ? `all ${total}` : `${visible} out of ${total}`
+                                } incidents`}</div>
+                            </div>
                             <h2 className={'menu-section-title'}>Incident Groups</h2>
-                            <IncidentGroupPicker
-                                incidentsByGroup={incidentsByGroup}
-                                visibleGroups={visibleGroups}
-                                onGroupToggled={onGroupToggled}
-                                onShowAllGroups={onShowAllGroups}
-                                onHideAllGroups={onHideAllGroups}
-                            />
-                        </div>
-                    </>
-                )}
-            </div>
+                            <div className={'menu-section menu-picker'}>
+                                <IncidentGroupPicker
+                                    incidentsByGroup={incidentsByGroup}
+                                    visibleGroups={visibleGroups}
+                                    onGroupToggled={onGroupToggled}
+                                    onShowAllGroups={onShowAllGroups}
+                                    onHideAllGroups={onHideAllGroups}
+                                />
+                            </div>
+                        </>
+                    )}
+                </div>
+            )}
 
             <div className={'menu-footer'}>
                 <div className='menu-collapser' onClick={() => setCollapsed(!collapsed)}>
