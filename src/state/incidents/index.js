@@ -1,5 +1,11 @@
 import useIncidentsReducer from './reducer';
-import { loadIncidents, hideAllIncidentGroups, showAllIncidentGroups, toggleIncidentGroup } from './actions';
+import {
+    loadIncidents,
+    hideAllIncidentGroups,
+    showAllIncidentGroups,
+    toggleIncidentGroup,
+    toggleDistrict
+} from './actions';
 import {
     getVisibleIncidents,
     getVisibleIncidentGroups,
@@ -7,7 +13,9 @@ import {
     getTotalIncidentCount,
     getVisibleIncidentCount,
     getIncidentCountInDistrict,
-    getIncidentCountInGroup
+    getIncidentCountInGroup,
+    getSortedDistricts,
+    getSortedIncidentGroups
 } from './selectors';
 
 /**
@@ -63,7 +71,7 @@ import {
  */
 
 // Actions creators:
-export { loadIncidents, hideAllIncidentGroups, showAllIncidentGroups, toggleIncidentGroup };
+export { loadIncidents, hideAllIncidentGroups, showAllIncidentGroups, toggleIncidentGroup, toggleDistrict };
 
 // Selectors:
 export {
@@ -73,7 +81,9 @@ export {
     getTotalIncidentCount,
     getVisibleIncidentCount,
     getIncidentCountInDistrict,
-    getIncidentCountInGroup
+    getIncidentCountInGroup,
+    getSortedIncidentGroups,
+    getSortedDistricts
 };
 
 // Reducer:

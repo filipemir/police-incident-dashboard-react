@@ -8,6 +8,7 @@ import './styles.scss';
 import TimeframePicker from '../TimeframePicker';
 import IncidentGroupFilter from '../IncidentGroupFilter';
 import { getTotalIncidentCount, getVisibleIncidentCount } from '../../state/incidents';
+import DistrictFilter from '../DistrictFilter';
 
 export default function Menu({
     timeframe,
@@ -67,9 +68,18 @@ export default function Menu({
                                     visible === total ? `all ${total}` : `${visible} of ${total}`
                                 } incidents`}</div>
                             </div>
+
                             <h2 className={'menu-section-title'}>Incident Groups</h2>
                             <div className={'menu-section menu-picker'}>
                                 <IncidentGroupFilter
+                                    incidentsState={incidentsState}
+                                    dispatchIncidentsAction={dispatchIncidentsAction}
+                                />
+                            </div>
+
+                            <h2 className={'menu-section-title'}>Districts</h2>
+                            <div className={'menu-section menu-picker'}>
+                                <DistrictFilter
                                     incidentsState={incidentsState}
                                     dispatchIncidentsAction={dispatchIncidentsAction}
                                 />

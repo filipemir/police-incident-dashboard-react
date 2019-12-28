@@ -4,11 +4,13 @@ import hexToRgba from 'hex-to-rgba';
 import './styles.scss';
 import { codeGroupScale } from '../../utils/codeGroups';
 import {
+    hideAllIncidentGroups,
+    showAllIncidentGroups,
+    toggleIncidentGroup,
     getIncidentCountInGroup,
     getSortedIncidentGroups,
     getVisibleIncidentGroups
-} from '../../state/incidents/selectors';
-import { hideAllIncidentGroups, showAllIncidentGroups, toggleIncidentGroup } from '../../state/incidents';
+} from '../../state/incidents';
 import FilterGroup from '../FilterGroup';
 
 export default function IncidentGroupFilter({ incidentsState, dispatchIncidentsAction }) {

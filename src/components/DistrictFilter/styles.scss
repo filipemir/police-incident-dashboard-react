@@ -1,9 +1,9 @@
 @import '../../styles/vars.scss';
 
-.incident-group-filter {
+.district-filter {
     height: 100%;
 
-    .incident-group {
+    .district {
         display: block;
         cursor: pointer;
         padding: 2px 5px;
@@ -15,20 +15,24 @@
         }
 
         &.inactive {
-            .incident-group__count,
-            .incident-group__name {
+            .district__count,
+            .district__name {
                 color: $gray1;
             }
 
-            .incident-group__name {
+            .district__name {
                 text-decoration: line-through;
+            }
+
+            .district__dot {
+                background-color: transparent;
             }
         }
     }
 
-    .incident-group__dot {
+    .district__marker {
         $diameter: 8px;
-        border-radius: 50%;
+        border-radius: 2px;
         display: inline-block;
         width: $diameter;
         height: $diameter;
@@ -37,9 +41,10 @@
         border-style: solid;
         border-width: 1px;
         margin-right: 0.5em;
+        background-color: $teal;
     }
 
-    .incident-group__count {
+    .district__count {
         margin-left: 0.5em;
         color: $teal;
     }

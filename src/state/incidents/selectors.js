@@ -84,3 +84,21 @@ export function getSortedIncidentGroups(state) {
 
     return result;
 }
+
+/**
+ * Returns an array of districts sorted in descending order by their incident
+ * count
+ *
+ * @param state {IncidentsState}
+ * @returns {string[]}
+ */
+export function getSortedDistricts(state) {
+    const { perDistrict } = state.counts,
+        result = Object.keys(perDistrict);
+
+    result.sort((a, b) => {
+        return perDistrict[b] - perDistrict[a];
+    });
+
+    return result;
+}
