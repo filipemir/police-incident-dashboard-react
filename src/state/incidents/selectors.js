@@ -73,14 +73,14 @@ export function getIncidentCountInDistrict(state, { district }) {
  * @returns {string[]}
  */
 export function getSortedIncidentGroups(state) {
-    const { counts } = state;
+    const { perGroup } = state.counts;
 
-    const result = Object.keys(counts.perGroup);
+    const result = Object.keys(perGroup);
 
     result.sort((a, b) => {
         if (a === 'Other') return 1;
         if (b === 'Other') return -1;
-        return counts[b] - counts[a];
+        return perGroup[b] - perGroup[a];
     });
 
     return result;
