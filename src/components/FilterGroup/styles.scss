@@ -1,0 +1,31 @@
+@import '../../styles/vars.scss';
+
+.filterer {
+    overflow-x: hidden;
+    transition: height 500ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .filterer-items {
+        overflow-y: scroll;
+    }
+
+    .filterer-bulk-actions {
+        display: flex;
+    }
+
+    .filterer-bulk-action {
+        background-color: $gray3;
+        text-align: center;
+        padding: 7px;
+        margin-top: 3px;
+        border-radius: 6px;
+        cursor: pointer;
+        flex-grow: 1;
+
+        &:not(:first-of-type) {
+            margin-left: 3px;
+        }
+    }
+}

@@ -11,7 +11,7 @@ export function getTotalIncidentCount(state) {
  * @returns {number}
  */
 export function getVisibleIncidentCount(state) {
-    return state.counts.visibleTotal;
+    return state.counts.totalVisible;
 }
 
 /**
@@ -73,9 +73,8 @@ export function getIncidentCountInDistrict(state, { district }) {
  * @returns {string[]}
  */
 export function getSortedIncidentGroups(state) {
-    const { perGroup } = state.counts;
-
-    const result = Object.keys(perGroup);
+    const { perGroup } = state.counts,
+        result = Object.keys(perGroup);
 
     result.sort((a, b) => {
         if (a === 'Other') return 1;

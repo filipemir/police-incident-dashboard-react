@@ -106,7 +106,7 @@ function reduceNewFilters(state, newFilters) {
     return {
         ...state,
         incidents: { ...incidents, visibleIds: newVisibleIds, hiddenIds: newHiddenIds },
-        counts: { ...counts, visibleTotal: newVisibleTotal },
+        counts: { ...counts, totalVisible: newVisibleTotal },
         filters: newFilters
     };
 }

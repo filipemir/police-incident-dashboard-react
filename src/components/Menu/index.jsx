@@ -6,7 +6,7 @@ import arrows from '../../images/arrows.svg';
 import controls from '../../images/controls.svg';
 import './styles.scss';
 import TimeframePicker from '../TimeframePicker';
-import IncidentGroupPicker from '../IncidentGroupPicker';
+import IncidentGroupFilter from '../IncidentGroupFilter';
 import { getTotalIncidentCount, getVisibleIncidentCount } from '../../state/incidents';
 
 export default function Menu({
@@ -64,12 +64,12 @@ export default function Menu({
                         <>
                             <div className={'menu-section'}>
                                 <div>{`Showing ${
-                                    visible === total ? `all ${total}` : `${visible} out of ${total}`
+                                    visible === total ? `all ${total}` : `${visible} of ${total}`
                                 } incidents`}</div>
                             </div>
                             <h2 className={'menu-section-title'}>Incident Groups</h2>
                             <div className={'menu-section menu-picker'}>
-                                <IncidentGroupPicker
+                                <IncidentGroupFilter
                                     incidentsState={incidentsState}
                                     dispatchIncidentsAction={dispatchIncidentsAction}
                                 />
