@@ -7,21 +7,19 @@ import controls from '../../images/controls.svg';
 import './styles.scss';
 import TimeframePicker from '../TimeframePicker';
 import IncidentGroupPicker from '../IncidentGroupPicker';
+import { getTotalIncidentCount, getVisibleIncidentCount } from '../../state/incidents';
 
 export default function Menu({
-    isLoadingIncidents,
-    incidentCount,
     timeframe,
     dates,
     onTimeframeChange,
-    onGroupToggled,
-    incidentsByGroup,
-    visibleGroups,
-    onShowAllGroups,
-    onHideAllGroups
+    isLoadingIncidents,
+    incidentsState,
+    dispatchIncidentsAction
 }) {
     const { startDate, endDate } = dates,
-        { total, visible } = incidentCount,
+        total = getTotalIncidentCount(incidentsState),
+        visible = getVisibleIncidentCount(incidentsState),
         hasIncidents = total > 0,
         [collapsed, setCollapsed] = useState(false);
 
@@ -72,11 +70,8 @@ export default function Menu({
                             <h2 className={'menu-section-title'}>Incident Groups</h2>
                             <div className={'menu-section menu-picker'}>
                                 <IncidentGroupPicker
-                                    incidentsByGroup={incidentsByGroup}
-                                    visibleGroups={visibleGroups}
-                                    onGroupToggled={onGroupToggled}
-                                    onShowAllGroups={onShowAllGroups}
-                                    onHideAllGroups={onHideAllGroups}
+                                    incidentsState={incidentsState}
+                                    dispatchIncidentsAction={dispatchIncidentsAction}
                                 />
                             </div>
                         </>

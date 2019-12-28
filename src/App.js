@@ -6,14 +6,9 @@ import Menu from './components/Menu';
 import './styles/global.scss';
 import { ONE_DAY } from './constants/timeframes';
 import { getTimeframeDates } from './utils/timeframes';
-import { getIncidents } from './utils/client';
-// import { getIncidents } from './mocks/client';
-import useIncidentsReducer, {
-    hideAllIncidentGroups,
-    loadIncidents,
-    showAllIncidentGroups,
-    toggleIncidentGroup
-} from './hooks/useIncidentsReducer';
+// import { getIncidents } from './utils/client';
+import { getIncidents } from './mocks/client';
+import useIncidentsReducer, { getVisibleIncidents, loadIncidents } from './state/incidents';
 
 // TODO: End date should be the present but BPD hasn't been updating their data while they work on
 // switching something or other about their systems, so for now we have to work with stale data
@@ -28,8 +23,7 @@ export default function App() {
                 endDate: END_DATE
             })
         ),
-        [incidentsState, dispatchIncidentsAction] = useIncidentsReducer(),
-        { incidentsByGroup, visibleGroups, visibleIncidents, incidentCount } = incidentsState;
+        [incidentsState, dispatchIncidentsAction] = useIncidentsReducer();
 
     useEffect(() => {
         const { startDate, endDate } = getTimeframeDates({
@@ -58,18 +52,14 @@ export default function App() {
     return (
         <div id='app-root'>
             <Menu
-                isLoadingIncidents={loading}
-                incidentCount={incidentCount}
-                incidentsByGroup={incidentsByGroup}
-                visibleGroups={visibleGroups}
                 timeframe={timeframe}
                 dates={dates}
                 onTimeframeChange={setTimeframe}
-                onGroupToggled={group => dispatchIncidentsAction(toggleIncidentGroup(group))}
-                onShowAllGroups={() => dispatchIncidentsAction(showAllIncidentGroups())}
-                onHideAllGroups={() => dispatchIncidentsAction(hideAllIncidentGroups())}
+                isLoadingIncidents={loading}
+                incidentsState={incidentsState}
+                dispatchIncidentsAction={dispatchIncidentsAction}
             />
-            <Map incidents={visibleIncidents} />
+            <Map incidents={getVisibleIncidents(incidentsState)} />
         </div>
     );
 }

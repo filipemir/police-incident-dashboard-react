@@ -4,7 +4,16 @@ const BASE_SQL_QUERY_URL = `https://data.boston.gov/api/3/action/datastore_searc
     DATE_FORMAT = 'YYYY-MM-DD hh:mm';
 
 /**
- * Returns an object mapping offense code groups to arrays of incidents
+ * Counter used to generate unique ids for incoming incidents. Incremented after each incident is processed.
+ * The incoming incidents do have a unique id as well, but this ensures that each id is in fact unique and
+ * always available. That's likely true on the backend side as well but this way we didn't have to worry about it
+ *
+ * @type {number}
+ */
+let counter = 0;
+
+/**
+ * Returns an array of incidents
  *
  * @param startDate - moment date
  * @param endDate - moment date
@@ -19,24 +28,8 @@ export async function getIncidents({ startDate, endDate }) {
     const res = await fetch(BASE_SQL_QUERY_URL + sqlQuery),
         json = await res.json();
 
-    // Group records:
-    const recordsByGroup = {};
-    json.result.records.forEach(r => {
-        const code = parseInt(r['OFFENSE_CODE'], 10),
-            group = incidentGroups[code];
-
-        if (!group) {
-            // TODO: Report these somewhere, instead of just logging them
-            console.log(`Incident with unknown group code found: ${group}. Assigning to "Other"`);
-            console.log(r);
-        }
-
-        const groupName = group ? group.GROUP : 'Other';
-
-        !recordsByGroup[groupName] && (recordsByGroup[groupName] = []);
-
-        recordsByGroup[groupName].push(r);
+    return json.result.records.map(r => {
+        counter += 1;
+        return { ...r, _clientSideId: `_i${counter}` };
     });
-
-    return recordsByGroup;
 }
