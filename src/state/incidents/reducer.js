@@ -1,4 +1,6 @@
 import { useReducer } from 'react';
+import isEmpty from 'lodash/isEmpty';
+
 import {
     HIDE_ALL_DISTRICTS,
     HIDE_ALL_GROUPS,
@@ -48,13 +50,13 @@ function incidentIsVisible({ incident, filters }) {
  * @returns {IncidentsState}
  */
 function reduceLoadIncidents(state, { incidents }) {
-    const visibleGroups = new Set(),
-        visibleDistricts = new Set(),
-        ids = new Set(),
+    const ids = new Set(),
         map = {},
         perGroup = {},
         perDistrict = {};
-    let total = 0;
+    let total = 0,
+        visibleGroups = new Set(),
+        visibleDistricts = new Set();
 
     incidents.forEach(incident => {
         map[incident._clientSideId] = incident;
@@ -72,6 +74,14 @@ function reduceLoadIncidents(state, { incidents }) {
         !perDistrict[district] && (perDistrict[district] = 0);
         perDistrict[district] += 1;
     });
+
+    if (!isEmpty(state.filters.visibleGroups)) {
+        visibleGroups = state.filters.visibleGroups;
+    }
+
+    if (!isEmpty(state.filters.visibleDistricts)) {
+        visibleDistricts = state.filters.visibleDistricts;
+    }
 
     return {
         incidents: { map, hiddenIds: new Set(), visibleIds: ids },
