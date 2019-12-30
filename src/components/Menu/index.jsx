@@ -9,6 +9,7 @@ import TimeframePicker from '../TimeframePicker';
 import IncidentGroupFilter from '../IncidentGroupFilter';
 import { getTotalIncidentCount, getVisibleIncidentCount } from '../../state/incidents';
 import DistrictFilter from '../DistrictFilter';
+import { LOCALE } from '../../constants/locale';
 
 export default function Menu({
     timeframe,
@@ -67,7 +68,9 @@ export default function Menu({
                         <>
                             <div className={'menu-section'}>
                                 <div className={'menu-summary'}>{`${
-                                    visible === total ? `${total}` : `${visible} of ${total}`
+                                    visible === total
+                                        ? `${total}`
+                                        : `${visible.toLocaleString(LOCALE)} of ${total.toLocaleString(LOCALE)}`
                                 } incidents`}</div>
                             </div>
 

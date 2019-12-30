@@ -10,10 +10,13 @@ import {
 import FilterGroup from '../FilterGroup';
 import { hideAllDistricts, showAllDistricts } from '../../state/incidents/actions';
 import { getDistrictName } from '../../utils/districts';
+import { LOCALE } from '../../constants/locale';
 
 export default function DistrictFilter({ incidentsState, dispatchIncidentsAction }) {
     let districts = getSortedDistricts(incidentsState).filter(d => !!d),
-        visibleDistricts = getVisibleDistricts(incidentsState);
+        visibleDistricts = getVisibleDistricts(incidentsState),
+        districtCount = districts.length.toLocaleString(LOCALE),
+        visibleDistrictCount = visibleDistricts.size.toLocaleString(LOCALE);
 
     return (
         <div className={'district-filter'}>
@@ -21,14 +24,14 @@ export default function DistrictFilter({ incidentsState, dispatchIncidentsAction
                 title={'Districts'}
                 summary={
                     visibleDistricts.size === districts.length
-                        ? `Showing all ${districts.length} districts`
-                        : `Showing ${visibleDistricts.size} of ${districts.length} districts`
+                        ? `Showing all ${districtCount} districts`
+                        : `Showing ${visibleDistrictCount} of ${districtCount} districts`
                 }
                 onSelectAll={() => dispatchIncidentsAction(showAllDistricts())}
                 onUnselectAll={() => dispatchIncidentsAction(hideAllDistricts())}
             >
                 {districts.map((district, i) => {
-                    const count = getIncidentCountInDistrict(incidentsState, { district }),
+                    const count = getIncidentCountInDistrict(incidentsState, { district }).toLocaleString(LOCALE),
                         isVisible = visibleDistricts.has(district),
                         districtInfo = getDistrictName({ districtCode: district }),
                         districtName = districtInfo && districtInfo.name;

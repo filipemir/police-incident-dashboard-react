@@ -12,10 +12,13 @@ import {
     getVisibleIncidentGroups
 } from '../../state/incidents';
 import FilterGroup from '../FilterGroup';
+import { LOCALE } from '../../constants/locale';
 
 export default function IncidentGroupFilter({ incidentsState, dispatchIncidentsAction }) {
     let groups = getSortedIncidentGroups(incidentsState),
-        visibleGroups = getVisibleIncidentGroups(incidentsState);
+        visibleGroups = getVisibleIncidentGroups(incidentsState),
+        groupsCount = groups.length.toLocaleString(LOCALE),
+        visibleGroupsCount = visibleGroups.size.toLocaleString(LOCALE);
 
     return (
         <div className={'incident-group-filter'}>
@@ -23,14 +26,14 @@ export default function IncidentGroupFilter({ incidentsState, dispatchIncidentsA
                 title={'Incident Groups'}
                 summary={
                     visibleGroups.size === groups.length
-                        ? `Showing all ${groups.length} incident groups`
-                        : `Showing ${visibleGroups.size} of ${groups.length} incident groups`
+                        ? `Showing all ${groupsCount} incident groups`
+                        : `Showing ${visibleGroupsCount} of ${groupsCount} incident groups`
                 }
                 onSelectAll={() => dispatchIncidentsAction(showAllIncidentGroups())}
                 onUnselectAll={() => dispatchIncidentsAction(hideAllIncidentGroups())}
             >
                 {groups.map((group, i) => {
-                    const count = getIncidentCountInGroup(incidentsState, { group }),
+                    const count = getIncidentCountInGroup(incidentsState, { group }).toLocaleString(LOCALE),
                         isVisible = visibleGroups.has(group),
                         color = codeGroupScale(group);
 
