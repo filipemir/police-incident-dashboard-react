@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import DISTRICTS from '../static/districts';
+import DISTRICTS from '../constants/districts';
 
 /**
  * @param {object}

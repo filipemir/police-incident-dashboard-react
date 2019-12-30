@@ -50,42 +50,46 @@ function incidentIsVisible({ incident, filters }) {
  * @returns {IncidentsState}
  */
 function reduceLoadIncidents(state, { incidents }) {
-    const ids = new Set(),
+    const visibleIds = new Set(),
+        groupsPreviouslyFiltered = !isEmpty(state.filters.visibleGroups),
+        districtsPreviouslyFiltered = !isEmpty(state.filters.visibleDistricts),
+        visibleGroups = groupsPreviouslyFiltered ? state.filters.visibleGroups : new Set(),
+        visibleDistricts = districtsPreviouslyFiltered ? state.filters.visibleDistricts : new Set(),
         map = {},
         perGroup = {},
         perDistrict = {};
+
     let total = 0,
-        visibleGroups = new Set(),
-        visibleDistricts = new Set();
+        totalVisible = 0;
 
+    // First reset filters and counts:
     incidents.forEach(incident => {
-        map[incident._clientSideId] = incident;
-        ids.add(incident._clientSideId);
-        total += 1;
-
         const groupName = getIncidentGroupName(incident),
             district = incident.DISTRICT;
 
-        visibleGroups.add(groupName);
+        map[incident._clientSideId] = incident;
+        total += 1;
+
         !perGroup[groupName] && (perGroup[groupName] = 0);
         perGroup[groupName] += 1;
+        !groupsPreviouslyFiltered && visibleGroups.add(groupName);
 
-        visibleDistricts.add(district);
         !perDistrict[district] && (perDistrict[district] = 0);
         perDistrict[district] += 1;
+        !districtsPreviouslyFiltered && visibleDistricts.add(district);
     });
 
-    if (!isEmpty(state.filters.visibleGroups)) {
-        visibleGroups = state.filters.visibleGroups;
-    }
-
-    if (!isEmpty(state.filters.visibleDistricts)) {
-        visibleDistricts = state.filters.visibleDistricts;
-    }
+    // Then reset visible ids and totals:
+    incidents.forEach(incident => {
+        if (incidentIsVisible({ incident, filters: { visibleDistricts, visibleGroups } })) {
+            visibleIds.add(incident._clientSideId);
+            totalVisible += 1;
+        }
+    });
 
     return {
-        incidents: { map, hiddenIds: new Set(), visibleIds: ids },
-        counts: { total, totalVisible: total, perGroup, perDistrict },
+        incidents: { map, hiddenIds: new Set(), visibleIds },
+        counts: { total, totalVisible, perGroup, perDistrict },
         filters: { visibleGroups, visibleDistricts }
     };
 }

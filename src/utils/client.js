@@ -1,5 +1,3 @@
-import incidentGroups from '../static/incident-groups.json';
-
 const BASE_SQL_QUERY_URL = `https://data.boston.gov/api/3/action/datastore_search_sql?sql=`,
     DATE_FORMAT = 'YYYY-MM-DD hh:mm';
 

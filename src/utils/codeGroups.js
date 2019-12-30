@@ -1,12 +1,17 @@
 import { scaleOrdinal } from 'd3-scale';
 import { schemeSet3 } from 'd3-scale-chromatic';
-import { CODE_GROUPS } from '../constants/codeGroups';
-import incidentGroups from '../static/incident-groups';
+import INCIDENT_GROUPS from '../constants/incident-groups';
+
+const incidentGroupNames = new Set();
+
+Object.values(INCIDENT_GROUPS).forEach(({ GROUP }) => {
+    incidentGroupNames.add(GROUP);
+});
 
 /**
  * Returns a scale to color the offense code groups
  */
-export const codeGroupScale = scaleOrdinal(schemeSet3).domain(CODE_GROUPS);
+export const codeGroupScale = scaleOrdinal(schemeSet3).domain(incidentGroupNames);
 
 /**
  * Gets the incident group name matching the provided incident's offense code
@@ -15,7 +20,7 @@ export const codeGroupScale = scaleOrdinal(schemeSet3).domain(CODE_GROUPS);
  */
 export function getIncidentGroupName(incident) {
     const code = parseInt(incident.OFFENSE_CODE, 10),
-        group = incidentGroups[code];
+        group = INCIDENT_GROUPS[code];
 
     if (!group) {
         // TODO: Report these somewhere, instead of just logging them
