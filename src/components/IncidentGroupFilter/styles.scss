@@ -2,6 +2,7 @@
 
 .incident-group-filter {
     height: 100%;
+    user-select: none;
 
     .incident-group {
         display: block;

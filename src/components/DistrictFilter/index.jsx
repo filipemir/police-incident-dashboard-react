@@ -42,6 +42,10 @@ export default function DistrictFilter({ incidentsState, dispatchIncidentsAction
                             key={`district-${i}`}
                             className={`district ${isVisible ? '' : 'inactive'}`}
                             onClick={() => dispatchIncidentsAction(toggleDistrict(district))}
+                            onDoubleClick={() => {
+                                dispatchIncidentsAction(hideAllDistricts());
+                                dispatchIncidentsAction(toggleDistrict(district));
+                            }}
                         >
                             <div className={`district__marker`} />
                             <span className={'district__name'}>{districtName}</span>

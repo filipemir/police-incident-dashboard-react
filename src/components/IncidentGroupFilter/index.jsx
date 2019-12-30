@@ -39,6 +39,10 @@ export default function IncidentGroupFilter({ incidentsState, dispatchIncidentsA
                             key={`input-group-${i}`}
                             className={`incident-group ${isVisible ? '' : 'inactive'}`}
                             onClick={() => dispatchIncidentsAction(toggleIncidentGroup(group))}
+                            onDoubleClick={() => {
+                                dispatchIncidentsAction(hideAllIncidentGroups());
+                                dispatchIncidentsAction(toggleIncidentGroup(group));
+                            }}
                         >
                             <div
                                 className={`incident-group__dot`}
