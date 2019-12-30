@@ -2,6 +2,8 @@ import React from 'react';
 import geojson from 'geojson';
 import * as leaflet from 'leaflet';
 import { Map, TileLayer, GeoJSON } from 'react-leaflet';
+import MarkerClusterGroup from 'react-leaflet-markercluster';
+// import 'react-leaflet-markercluster/dist/styles.min.css';
 
 import './styles.scss';
 import { codeGroupScale, getIncidentGroupName } from '../../utils/codeGroups';
@@ -38,19 +40,43 @@ function bindIncidentPopup(feature, layer) {
  */
 export default function IncidentMap({ incidents }) {
     const geojsonData = geojson.parse(incidents, { Point: ['Lat', 'Long'] });
+    const createClusterCustomIcon = cluster => {
+        const count = cluster.getChildCount();
+        let size = 'LargeXL';
+
+        if (count < 10) {
+            size = 'Small';
+        } else if (count >= 10 && count < 100) {
+            size = 'Medium';
+        } else if (count >= 100 && count < 500) {
+            size = 'Large';
+        }
+        const options = {
+            cluster: `markerCluster${size}`
+        };
+
+        return leaflet.divIcon({
+            html: `<div>
+        <span class="markerClusterLabel">${count}</span>
+      </div>`,
+            className: `${options.cluster}`
+        });
+    };
 
     // Commenting out the incident list for now list for performance reasons:
     return (
         <div className='map-root'>
             {/*<IncidentList incidents={incidents} />*/}
-            <Map center={BOS_LAT_LONG} bounds={BOS_LIMITS}>
+            <Map center={BOS_LAT_LONG} bounds={BOS_LIMITS} maxZoom={16}>
                 <TileLayer url={TILE_LAYER_URL} attribution={TILE_LAYER_ATTRIBUTION} />
-                <GeoJSON
-                    key={Math.random()}
-                    data={geojsonData}
-                    pointToLayer={getIncidentMarker}
-                    onEachFeature={bindIncidentPopup}
-                />
+                <MarkerClusterGroup maxClusterRadius={35}>
+                    <GeoJSON
+                        key={Math.random()}
+                        data={geojsonData}
+                        pointToLayer={getIncidentMarker}
+                        onEachFeature={bindIncidentPopup}
+                    />
+                </MarkerClusterGroup>
             </Map>
         </div>
     );
