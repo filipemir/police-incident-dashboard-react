@@ -233,7 +233,7 @@ function incidentsReducer(state, action) {
         case LOAD_INCIDENTS:
             return reduceLoadIncidents(state, payload);
         case LOAD_INCIDENTS_AND_RESET_FILTERS:
-            return reduceResetFilters(reduceLoadIncidents(state, payload));
+            return reduceLoadIncidents(reduceResetFilters(state), payload);
         case TOGGLE_INCIDENT_GROUP:
         case TOGGLE_DISTRICT:
             return reduceToggleFilter(state, payload);
