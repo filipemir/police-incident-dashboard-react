@@ -8,10 +8,10 @@ export default function FilterGroup({ title, children, onSelectAll, onUnselectAl
     const [expanded, setExpanded] = useState(false);
 
     return (
-        <div className={'filterer'}>
+        <div className={`filterer ${expanded ? 'filterer__expanded' : ''}`}>
             <div className={'filterer-header'} onClick={() => setExpanded(!expanded)}>
                 <span>{title}</span>
-                <div className={`filterer-header-arrows ${expanded ? 'point-up' : ''}`}>
+                <div className={`filterer-header-arrows ${expanded ? 'filterer-header-arrows__point-up' : ''}`}>
                     <ReactSVG src={arrows} />
                 </div>
             </div>

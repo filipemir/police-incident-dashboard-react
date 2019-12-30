@@ -9,6 +9,12 @@
     background-color: darken($gray2, 3%);
     border-radius: $border-radius;
 
+    overflow-y: hidden;
+
+    .filterer-items {
+        overflow-y: scroll;
+    }
+
     .filterer-header {
         border-radius: $border-radius;
         text-transform: uppercase;
@@ -33,7 +39,7 @@
                 height: 30px;
             }
 
-            &.point-up {
+            &.filterer-header-arrows__point-up {
                 svg {
                     transform: rotate(-90deg);
                 }
@@ -46,10 +52,6 @@
         position: absolute;
         top: 1px;
         right: 5px;
-    }
-
-    .filterer-items {
-        overflow-y: scroll;
     }
 
     .filterer-bulk-actions {
