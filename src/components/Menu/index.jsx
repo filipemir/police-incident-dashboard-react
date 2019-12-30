@@ -43,7 +43,7 @@ export default function Menu({
 
             {!collapsed && (
                 <div className={'menu-content'}>
-                    <div className={'menu-section'}>
+                    <div className={'menu-section menu-date-section'}>
                         <h2 className={'menu-section-title'}>Date Range</h2>
                         <span className={'menu-dates'}>{`${startDate.format(
                             startDate.year === endDate.year ? 'MMM D' : 'MMM D, YYYY'
@@ -58,14 +58,16 @@ export default function Menu({
                     )}
 
                     {!isLoadingIncidents && !hasIncidents && (
-                        <span>Oops. We couldn't find any incidents with location data for this date range</span>
+                        <div className={'menu-summary'}>
+                            Oops. We couldn't find any incidents with location data for this date range
+                        </div>
                     )}
 
                     {!isLoadingIncidents && hasIncidents && (
                         <>
                             <div className={'menu-section'}>
-                                <div>{`Showing ${
-                                    visible === total ? `all ${total}` : `${visible} of ${total}`
+                                <div className={'menu-summary'}>{`${
+                                    visible === total ? `${total}` : `${visible} of ${total}`
                                 } incidents`}</div>
                             </div>
 

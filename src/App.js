@@ -6,8 +6,7 @@ import Menu from './components/Menu';
 import './styles/global.scss';
 import { ONE_DAY } from './constants/timeframes';
 import { getTimeframeDates } from './utils/timeframes';
-// import { getIncidents } from './utils/client';
-import { getIncidents } from './mocks/client';
+import { getIncidents } from './utils/client';
 import useIncidentsReducer, { getVisibleIncidents, loadIncidents } from './state/incidents';
 
 // TODO: End date should be the present but BPD hasn't been updating their data while they work on
