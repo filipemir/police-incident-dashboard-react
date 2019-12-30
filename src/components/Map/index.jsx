@@ -42,7 +42,6 @@ export default function IncidentMap({ incidents }) {
     // Commenting out the incident list for now list for performance reasons:
     return (
         <div className='map-root'>
-            {/*<IncidentList incidents={incidents} />*/}
             <Map center={BOS_LAT_LONG} bounds={BOS_LIMITS}>
                 <TileLayer url={TILE_LAYER_URL} attribution={TILE_LAYER_ATTRIBUTION} />
                 <GeoJSON

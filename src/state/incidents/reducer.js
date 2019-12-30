@@ -1,10 +1,11 @@
 import { useReducer } from 'react';
-import isEmpty from 'lodash/isEmpty';
 
 import {
     HIDE_ALL_DISTRICTS,
     HIDE_ALL_GROUPS,
     LOAD_INCIDENTS,
+    LOAD_INCIDENTS_AND_RESET_FILTERS,
+    RESET_FILTERS,
     SHOW_ALL_DISTRICTS,
     SHOW_ALL_GROUPS,
     TOGGLE_DISTRICT,
@@ -26,7 +27,9 @@ const INITIAL_STATE = {
     },
     filters: {
         visibleGroups: new Set(),
-        visibleDistricts: new Set()
+        groupsChanged: false,
+        visibleDistricts: new Set(),
+        districtsChanged: false
     }
 };
 
@@ -51,8 +54,8 @@ function incidentIsVisible({ incident, filters }) {
  */
 function reduceLoadIncidents(state, { incidents }) {
     const visibleIds = new Set(),
-        groupsPreviouslyFiltered = !isEmpty(state.filters.visibleGroups),
-        districtsPreviouslyFiltered = !isEmpty(state.filters.visibleDistricts),
+        groupsPreviouslyFiltered = state.filters.groupsChanged,
+        districtsPreviouslyFiltered = state.filters.districtsChanged,
         visibleGroups = groupsPreviouslyFiltered ? state.filters.visibleGroups : new Set(),
         visibleDistricts = districtsPreviouslyFiltered ? state.filters.visibleDistricts : new Set(),
         map = {},
@@ -136,6 +139,8 @@ function reduceToggleFilter(state, { group, district }) {
     const newFilters = { ...state.filters };
 
     if (group) {
+        newFilters.groupsChanged = true;
+
         if (newFilters.visibleGroups.has(group)) {
             newFilters.visibleGroups.delete(group);
         } else {
@@ -144,6 +149,8 @@ function reduceToggleFilter(state, { group, district }) {
     }
 
     if (district) {
+        newFilters.districtsChanged = true;
+
         if (newFilters.visibleDistricts.has(district)) {
             newFilters.visibleDistricts.delete(district);
         } else {
@@ -160,7 +167,7 @@ function reduceToggleFilter(state, { group, district }) {
  */
 function reduceShowAllIncidentGroups(state) {
     const { filters, counts } = state,
-        newFilters = { ...filters, visibleGroups: new Set(Object.keys(counts.perGroup)) };
+        newFilters = { ...filters, visibleGroups: new Set(Object.keys(counts.perGroup)), groupsChanged: true };
 
     return reduceNewFilters(state, newFilters);
 }
@@ -171,7 +178,7 @@ function reduceShowAllIncidentGroups(state) {
  */
 function reduceShowAllDistricts(state) {
     const { filters, counts } = state,
-        newFilters = { ...filters, visibleDistricts: new Set(Object.keys(counts.perDistrict)) };
+        newFilters = { ...filters, visibleDistricts: new Set(Object.keys(counts.perDistrict)), districtsChanged: true };
 
     return reduceNewFilters(state, newFilters);
 }
@@ -182,7 +189,7 @@ function reduceShowAllDistricts(state) {
  */
 function reduceHideAllIncidentGroups(state) {
     const { filters } = state,
-        newFilters = { ...filters, visibleGroups: new Set() };
+        newFilters = { ...filters, visibleGroups: new Set(), groupsChanged: true };
 
     return reduceNewFilters(state, newFilters);
 }
@@ -193,9 +200,25 @@ function reduceHideAllIncidentGroups(state) {
  */
 function reduceHideAllDistricts(state) {
     const { filters } = state,
-        newFilters = { ...filters, visibleDistricts: new Set() };
+        newFilters = { ...filters, visibleDistricts: new Set(), districtsChanged: true };
 
     return reduceNewFilters(state, newFilters);
+}
+
+/**
+ * @param state {IncidentsState}
+ * @returns {IncidentsState}
+ */
+function reduceResetFilters(state) {
+    return {
+        ...state,
+        filters: {
+            visibleGroups: new Set(Object.keys(state.counts.perGroup)),
+            groupsChanged: false,
+            visibleDistricts: new Set(Object.keys(state.counts.perDistrict)),
+            districtsChanged: false
+        }
+    };
 }
 
 /**
@@ -209,6 +232,8 @@ function incidentsReducer(state, action) {
     switch (type) {
         case LOAD_INCIDENTS:
             return reduceLoadIncidents(state, payload);
+        case LOAD_INCIDENTS_AND_RESET_FILTERS:
+            return reduceResetFilters(reduceLoadIncidents(state, payload));
         case TOGGLE_INCIDENT_GROUP:
         case TOGGLE_DISTRICT:
             return reduceToggleFilter(state, payload);
@@ -220,6 +245,8 @@ function incidentsReducer(state, action) {
             return reduceHideAllIncidentGroups(state);
         case HIDE_ALL_DISTRICTS:
             return reduceHideAllDistricts(state);
+        case RESET_FILTERS:
+            return reduceResetFilters(state);
         default:
             throw Error(`Invalid incidents reducer action: ${type}`);
     }

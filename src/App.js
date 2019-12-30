@@ -8,6 +8,7 @@ import { ONE_DAY } from './constants/timeframes';
 import { getTimeframeDates } from './utils/timeframes';
 import { getIncidents } from './utils/client';
 import useIncidentsReducer, { getVisibleIncidents, loadIncidents } from './state/incidents';
+import { loadIncidentsAndResetFilters } from './state/incidents/actions';
 
 // TODO: End date should be the present but BPD hasn't been updating their data while they work on
 // switching something or other about their systems, so for now we have to work with stale data
@@ -25,25 +26,24 @@ export default function App() {
         [incidentsState, dispatchIncidentsAction] = useIncidentsReducer();
 
     useEffect(() => {
-        const { startDate, endDate } = getTimeframeDates({
-                timeframe,
-                endDate: END_DATE
-            }),
-            refreshIncidents = () => {
-                getIncidents({ startDate, endDate }).then(incidentsByGroup => {
-                    dispatchIncidentsAction(loadIncidents(incidentsByGroup));
-                    setLoading(false);
-                });
-            };
+        const { startDate, endDate } = getTimeframeDates({ timeframe, endDate: END_DATE });
 
         // Update dates in state:
         setDates({ startDate, endDate });
 
         // Refresh incidents in map:
-        refreshIncidents();
+        getIncidents({ startDate, endDate }).then(incidentsByGroup => {
+            dispatchIncidentsAction(loadIncidentsAndResetFilters(incidentsByGroup));
+            setLoading(false);
+        });
 
         // Reset incidents periodically so new ones show up:
-        const intervalId = setInterval(refreshIncidents, 60 * 1000);
+        const intervalId = setInterval(() => {
+            getIncidents({ startDate, endDate }).then(incidentsByGroup => {
+                dispatchIncidentsAction(loadIncidents(incidentsByGroup));
+                setLoading(false);
+            });
+        }, 60 * 1000);
         return () => clearInterval(intervalId);
     }, [timeframe, dispatchIncidentsAction]);
 

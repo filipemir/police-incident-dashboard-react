@@ -66,7 +66,9 @@ import {
  *  @property {number} total
  *  @property {number} totalVisible
  *  @property {{ [string]: number }} perGroup - Map of all incident group names to incident counts
+ *  @property {boolean} groupsChanged - Has the user changed the group filter from the default set
  *  @property {{ [string]: number }} perDistrict - Map of all districts to incident counts
+ *  @property {boolean} districtsChanged - Has the user changed the districts filter from the default set
  * @property {IncidentsFilters} filters
  */
 

@@ -3,12 +3,14 @@
  * @type {string}
  */
 export const LOAD_INCIDENTS = 'load-incidents';
+export const LOAD_INCIDENTS_AND_RESET_FILTERS = 'load-incidents-and-reset-filters';
 export const TOGGLE_INCIDENT_GROUP = 'toggle-group';
 export const TOGGLE_DISTRICT = 'toggle-district';
 export const HIDE_ALL_GROUPS = 'hide-all-groups';
 export const HIDE_ALL_DISTRICTS = 'hide-all-districts';
 export const SHOW_ALL_GROUPS = 'show-all-groups';
 export const SHOW_ALL_DISTRICTS = 'show-all-districts';
+export const RESET_FILTERS = 'reset-filters';
 
 /**
  * @param {Incident[]} incidents
@@ -16,6 +18,14 @@ export const SHOW_ALL_DISTRICTS = 'show-all-districts';
  */
 export function loadIncidents(incidents) {
     return { type: LOAD_INCIDENTS, payload: { incidents } };
+}
+
+/**
+ * @param {Incident[]} incidents
+ * @returns {IncidentsAction<{ incidents: Incident[] }>}
+ */
+export function loadIncidentsAndResetFilters(incidents) {
+    return { type: LOAD_INCIDENTS_AND_RESET_FILTERS, payload: { incidents } };
 }
 
 /**
@@ -60,4 +70,11 @@ export function hideAllIncidentGroups() {
  */
 export function hideAllDistricts() {
     return { type: HIDE_ALL_DISTRICTS };
+}
+
+/**
+ * @returns {IncidentsAction<>}
+ */
+export function resetFilters() {
+    return { type: RESET_FILTERS };
 }

@@ -69,7 +69,7 @@ export default function Menu({
                             <div className={'menu-section'}>
                                 <div className={'menu-summary'}>{`${
                                     visible === total
-                                        ? `${total}`
+                                        ? `${total.toLocaleString(LOCALE)}`
                                         : `${visible.toLocaleString(LOCALE)} of ${total.toLocaleString(LOCALE)}`
                                 } incidents`}</div>
                             </div>
