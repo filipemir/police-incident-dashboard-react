@@ -6,14 +6,16 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    background-color: darken($gray2, 3%);
+    border-radius: $border-radius;
 
     .filterer-header {
+        border-radius: $border-radius;
         text-transform: uppercase;
-        margin: 4px 0;
+        margin: 0;
         font-weight: 700;
         font-size: 1em;
         display: inline-block;
-        border-radius: $border-radius;
         padding: 7px;
         cursor: pointer;
         position: relative;
@@ -64,7 +66,7 @@
         flex-grow: 1;
 
         &:not(:first-of-type) {
-            margin-left: 3px;
+            margin-left: 10px;
         }
     }
 }
