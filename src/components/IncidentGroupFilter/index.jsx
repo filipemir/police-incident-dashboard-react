@@ -21,6 +21,11 @@ export default function IncidentGroupFilter({ incidentsState, dispatchIncidentsA
         <div className={'incident-group-filter'}>
             <FilterGroup
                 title={'Incident Groups'}
+                summary={
+                    visibleGroups.size === groups.length
+                        ? `Showing all ${groups.length} incident groups`
+                        : `Showing ${visibleGroups.size} of ${groups.length} incident groups`
+                }
                 onSelectAll={() => dispatchIncidentsAction(showAllIncidentGroups())}
                 onUnselectAll={() => dispatchIncidentsAction(hideAllIncidentGroups())}
             >

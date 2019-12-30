@@ -4,17 +4,22 @@ import './styles.scss';
 import { ReactSVG } from 'react-svg';
 import arrows from '../../images/arrows.svg';
 
-export default function FilterGroup({ title, children, onSelectAll, onUnselectAll }) {
+export default function FilterGroup({ title, summary, children, onSelectAll, onUnselectAll }) {
     const [expanded, setExpanded] = useState(false);
 
     return (
         <div className={`filterer ${expanded ? 'filterer__expanded' : ''}`}>
             <div className={'filterer-header'} onClick={() => setExpanded(!expanded)}>
-                <span>{title}</span>
+                <span className={'filterer-title'}>{title}</span>
                 <div className={`filterer-header-arrows ${expanded ? 'filterer-header-arrows__point-up' : ''}`}>
                     <ReactSVG src={arrows} />
                 </div>
             </div>
+            {!expanded && summary && (
+                <div className={'filterer-summary'} onClick={() => setExpanded(!expanded)}>
+                    {summary}
+                </div>
+            )}
             {expanded && (
                 <>
                     <div className={'filterer-items'}>{children}</div>

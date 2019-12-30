@@ -19,19 +19,23 @@ export default function DistrictFilter({ incidentsState, dispatchIncidentsAction
         <div className={'district-filter'}>
             <FilterGroup
                 title={'Districts'}
+                summary={
+                    visibleDistricts.size === districts.length
+                        ? `Showing all ${districts.length} districts`
+                        : `Showing ${visibleDistricts.size} of ${districts.length} districts`
+                }
                 onSelectAll={() => dispatchIncidentsAction(showAllDistricts())}
                 onUnselectAll={() => dispatchIncidentsAction(hideAllDistricts())}
             >
                 {districts.map((district, i) => {
                     const count = getIncidentCountInDistrict(incidentsState, { district }),
                         isVisible = visibleDistricts.has(district),
-                        districtInfo = getDistrictName({ districtCode: district });
+                        districtInfo = getDistrictName({ districtCode: district }),
+                        districtName = districtInfo && districtInfo.name;
 
-                    if (!district) {
+                    if (!districtName) {
                         return null;
                     }
-
-                    const districtName = districtInfo && districtInfo.name;
 
                     return (
                         <div

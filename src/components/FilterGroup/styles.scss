@@ -11,15 +11,17 @@
 
     overflow-y: hidden;
 
+    .filterer-summary {
+        padding: 7px;
+    }
+
     .filterer-items {
         overflow-y: scroll;
     }
 
     .filterer-header {
         border-radius: $border-radius;
-        text-transform: uppercase;
         margin: 0;
-        font-weight: 700;
         font-size: 1em;
         display: inline-block;
         padding: 7px;
@@ -45,6 +47,11 @@
                 }
             }
         }
+    }
+
+    .filterer-title {
+        text-transform: uppercase;
+        font-weight: 700;
     }
 
     .menu-section-expander-arrows {
