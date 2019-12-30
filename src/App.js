@@ -9,6 +9,8 @@ import { getTimeframeDates } from './utils/timeframes';
 import { getIncidents } from './utils/client';
 import useIncidentsReducer, { getVisibleIncidents, loadIncidents } from './state/incidents';
 import { loadIncidentsAndResetFilters } from './state/incidents/actions';
+import IncidentFeed from './components/IncidentFeed';
+import { getAllIncidents } from './state/incidents/selectors';
 
 // TODO: End date should be the present but BPD hasn't been updating their data while they work on
 // switching something or other about their systems, so for now we have to work with stale data
@@ -32,15 +34,15 @@ export default function App() {
         setDates({ startDate, endDate });
 
         // Refresh incidents in map:
-        getIncidents({ startDate, endDate }).then(incidentsByGroup => {
-            dispatchIncidentsAction(loadIncidentsAndResetFilters(incidentsByGroup));
+        getIncidents({ startDate, endDate }).then(incidents => {
+            dispatchIncidentsAction(loadIncidentsAndResetFilters(incidents));
             setLoading(false);
         });
 
         // Reset incidents periodically so new ones show up:
         const intervalId = setInterval(() => {
-            getIncidents({ startDate, endDate }).then(incidentsByGroup => {
-                dispatchIncidentsAction(loadIncidents(incidentsByGroup));
+            getIncidents({ startDate, endDate }).then(incidents => {
+                dispatchIncidentsAction(loadIncidents(incidents));
                 setLoading(false);
             });
         }, 60 * 1000);
@@ -61,6 +63,7 @@ export default function App() {
                 dispatchIncidentsAction={dispatchIncidentsAction}
             />
             <Map incidents={getVisibleIncidents(incidentsState)} />
+            <IncidentFeed incidents={getAllIncidents(incidentsState)} />
         </div>
     );
 }

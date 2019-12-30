@@ -1,0 +1,21 @@
+@import '../../styles/vars.scss';
+
+.incident-card {
+    max-width: 300px;
+    border-radius: $border-radius;
+    background-color: $gray2;
+    padding: 10px 20px;
+    margin: 10px;
+    border-left-width: 8px;
+    border-left-style: solid;
+
+    .incident-group {
+        font-size: 17px;
+        margin: 4px 0;
+    }
+
+    .incident-time,
+    .incident-location {
+        font-size: 12px;
+    }
+}

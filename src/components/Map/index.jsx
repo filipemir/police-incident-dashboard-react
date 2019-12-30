@@ -39,7 +39,6 @@ function bindIncidentPopup(feature, layer) {
 export default function IncidentMap({ incidents }) {
     const geojsonData = geojson.parse(incidents, { Point: ['Lat', 'Long'] });
 
-    // Commenting out the incident list for now list for performance reasons:
     return (
         <div className='map-root'>
             <Map center={BOS_LAT_LONG} bounds={BOS_LIMITS}>

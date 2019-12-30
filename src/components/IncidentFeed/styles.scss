@@ -1,0 +1,11 @@
+@import '../../styles/vars.scss';
+
+.incident-feed {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: $white;
+    font-size: 0.9em;
+    font-weight: 300;
+    padding: 10px;
+}

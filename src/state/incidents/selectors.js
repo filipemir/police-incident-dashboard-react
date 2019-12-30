@@ -18,6 +18,14 @@ export function getVisibleIncidentCount(state) {
  * @param state {IncidentsState}
  * @returns {Incident[]}
  */
+export function getAllIncidents(state) {
+    return state.incidents.sortedByDate;
+}
+
+/**
+ * @param state {IncidentsState}
+ * @returns {Incident[]}
+ */
 export function getVisibleIncidents(state) {
     const { visibleIds, map } = state.incidents,
         result = [];

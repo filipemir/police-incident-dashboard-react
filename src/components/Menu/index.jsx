@@ -67,7 +67,7 @@ export default function Menu({
                     {!isLoadingIncidents && hasIncidents && (
                         <>
                             <div className={'menu-section'}>
-                                <div className={'menu-summary'}>{`${
+                                <div className={'menu-summary'}>{`Showing ${
                                     visible === total
                                         ? `${total.toLocaleString(LOCALE)}`
                                         : `${visible.toLocaleString(LOCALE)} of ${total.toLocaleString(LOCALE)}`

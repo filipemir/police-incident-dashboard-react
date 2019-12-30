@@ -59,6 +59,7 @@ import {
  * @typedef IncidentsState
  * @type {object}
  * @property {object} incidents
+ *  @property {Incident[]} sortedByDate - Array of incidents sorted by descending date
  *  @property {{ [string]: Incident }} map - Map of unique ids to incidents
  *  @property {Set<string>} visibleIds - Ids of incidents to display, i.e those not currently filtered out
  *  @property {Set<string>} hiddenIds - Ids of incidents to hide, i.e those currently filtered out

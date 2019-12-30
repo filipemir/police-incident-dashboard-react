@@ -12,10 +12,12 @@ import {
     TOGGLE_INCIDENT_GROUP
 } from './actions';
 import { getIncidentGroupName } from '../../utils/codeGroups';
+import { sortIncidentsByDescendingDate } from '../../utils/incidents';
 
 const INITIAL_STATE = {
     incidents: {
         map: {},
+        sortedByDate: [],
         visibleIds: new Set(),
         hiddenIds: new Set()
     },
@@ -91,7 +93,7 @@ function reduceLoadIncidents(state, { incidents }) {
     });
 
     return {
-        incidents: { map, hiddenIds: new Set(), visibleIds },
+        incidents: { map, hiddenIds: new Set(), visibleIds, sortedByDate: sortIncidentsByDescendingDate(incidents) },
         counts: { total, totalVisible, perGroup, perDistrict },
         filters: { visibleGroups, visibleDistricts }
     };

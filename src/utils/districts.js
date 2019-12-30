@@ -7,6 +7,12 @@ import DISTRICTS from '../constants/districts';
  * @returns {string|undefined}
  */
 export function getDistrictName({ districtCode }) {
+    const districtInfo = getDistrictInfo({ districtCode });
+
+    return districtInfo && districtInfo.name;
+}
+
+export function getDistrictInfo({ districtCode }) {
     if (isEmpty(districtCode)) {
         return;
     }
