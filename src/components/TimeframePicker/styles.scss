@@ -9,7 +9,7 @@
 
     .react-select__control {
         border: none !important;
-        border-radius: 6px;
+        border-radius: $border-radius;
     }
 
     .react-select__control,

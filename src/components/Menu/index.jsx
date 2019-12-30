@@ -69,7 +69,6 @@ export default function Menu({
                                 } incidents`}</div>
                             </div>
 
-                            <h2 className={'menu-section-title'}>Incident Groups</h2>
                             <div className={'menu-section menu-picker'}>
                                 <IncidentGroupFilter
                                     incidentsState={incidentsState}
@@ -77,7 +76,6 @@ export default function Menu({
                                 />
                             </div>
 
-                            <h2 className={'menu-section-title'}>Districts</h2>
                             <div className={'menu-section menu-picker'}>
                                 <DistrictFilter
                                     incidentsState={incidentsState}

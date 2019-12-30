@@ -18,6 +18,7 @@ export default function DistrictFilter({ incidentsState, dispatchIncidentsAction
     return (
         <div className={'district-filter'}>
             <FilterGroup
+                title={'Districts'}
                 onSelectAll={() => dispatchIncidentsAction(showAllDistricts())}
                 onUnselectAll={() => dispatchIncidentsAction(hideAllDistricts())}
             >
@@ -39,7 +40,7 @@ export default function DistrictFilter({ incidentsState, dispatchIncidentsAction
                             onClick={() => dispatchIncidentsAction(toggleDistrict(district))}
                         >
                             <div className={`district__marker`} />
-                            <span className={'district__name'}>{`${district}: ${districtName}`}</span>
+                            <span className={'district__name'}>{districtName}</span>
                             <span className={'district__count'}>{count}</span>
                         </div>
                     );

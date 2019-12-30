@@ -31,7 +31,6 @@ export default function App() {
                 endDate: END_DATE
             }),
             refreshIncidents = () => {
-                setLoading(true);
                 getIncidents({ startDate, endDate }).then(incidentsByGroup => {
                     dispatchIncidentsAction(loadIncidents(incidentsByGroup));
                     setLoading(false);
@@ -54,7 +53,10 @@ export default function App() {
             <Menu
                 timeframe={timeframe}
                 dates={dates}
-                onTimeframeChange={setTimeframe}
+                onTimeframeChange={t => {
+                    setLoading(true);
+                    setTimeframe(t);
+                }}
                 isLoadingIncidents={loading}
                 incidentsState={incidentsState}
                 dispatchIncidentsAction={dispatchIncidentsAction}

@@ -7,6 +7,45 @@
     flex-direction: column;
     height: 100%;
 
+    .filterer-header {
+        text-transform: uppercase;
+        margin: 4px 0;
+        font-weight: 700;
+        font-size: 1em;
+        display: inline-block;
+        border-radius: $border-radius;
+        padding: 7px;
+        cursor: pointer;
+        position: relative;
+        background-color: $gray3;
+
+        .filterer-header-arrows {
+            display: inline-block;
+            position: absolute;
+            top: 1px;
+            right: 5px;
+
+            svg {
+                transform: rotate(90deg);
+                fill: $gray1;
+                height: 30px;
+            }
+
+            &.point-up {
+                svg {
+                    transform: rotate(-90deg);
+                }
+            }
+        }
+    }
+
+    .menu-section-expander-arrows {
+        display: inline-block;
+        position: absolute;
+        top: 1px;
+        right: 5px;
+    }
+
     .filterer-items {
         overflow-y: scroll;
     }
@@ -20,7 +59,7 @@
         text-align: center;
         padding: 7px;
         margin-top: 3px;
-        border-radius: 6px;
+        border-radius: $border-radius;
         cursor: pointer;
         flex-grow: 1;
 
