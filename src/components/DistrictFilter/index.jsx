@@ -33,8 +33,7 @@ export default function DistrictFilter({ incidentsState, dispatchIncidentsAction
                 {districts.map((district, i) => {
                     const count = getIncidentCountInDistrict(incidentsState, { district }).toLocaleString(LOCALE),
                         isVisible = visibleDistricts.has(district),
-                        districtInfo = getDistrictName({ districtCode: district }),
-                        districtName = districtInfo && districtInfo.name;
+                        districtName = getDistrictName({ districtCode: district });
 
                     if (!districtName) {
                         return null;
