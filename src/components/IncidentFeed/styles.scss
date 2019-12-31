@@ -8,4 +8,12 @@
     font-size: 0.9em;
     font-weight: 300;
     padding: 10px;
+
+    .incident-feed-title {
+        width: 100%;
+        text-align: center;
+        color: $teal;
+        font-weight: 400;
+        font-size: 18px;
+    }
 }
