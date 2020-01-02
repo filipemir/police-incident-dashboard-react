@@ -8,6 +8,27 @@
     font-size: 0.9em;
     font-weight: 300;
     padding: 10px;
+    overflow-y: hidden;
+    height: 100vh;
+    box-sizing: border-box;
+    z-index: 1;
+
+    &:after {
+        content: ' ';
+        height: 100px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        z-index: 3;
+        background-image: linear-gradient(transparent, black);
+    }
+
+    .incident-feed-content {
+        overflow-y: scroll;
+        height: 100vh;
+        z-index: 2;
+        position: relative;
+    }
 
     .incident-feed-title {
         width: 100%;
@@ -15,5 +36,6 @@
         color: $teal;
         font-weight: 400;
         font-size: 18px;
+        z-index: 2;
     }
 }
