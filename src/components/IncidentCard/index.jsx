@@ -16,7 +16,10 @@ export default function IncidentCard({ incident }) {
     return (
         <div className={'incident-card'} style={{ borderColor: groupColor }}>
             <div className={'incident-time'}>{moment(incident.OCCURRED_ON_DATE).format('llll')}</div>
-            <div className={'incident-group'}>{incidentGroupName}</div>
+            <div className='incident-description'>
+                <span className={'incident-group-name'}>{incidentGroupName}</span>
+                <span className={'incident-description-full'}>{incident.OFFENSE_DESCRIPTION}</span>
+            </div>
             <div className={'incident-location'}>
                 <span className={'incident-district'}>{getDistrictName({ districtCode: incident.DISTRICT })}</span>
                 <span>, </span>

@@ -10,13 +10,28 @@
     border-left-style: solid;
     cursor: pointer;
 
-    .incident-group {
+    .incident-description {
         font-size: 17px;
         margin: 4px 0;
+    }
+
+    .incident-group-name {
+        font-weight: 500;
+    }
+
+    .incident-description-full {
+        display: block;
+        font-size: 0.7em;
+        font-weight: 100;
+        line-height: 1em;
     }
 
     .incident-time,
     .incident-location {
         font-size: 12px;
+    }
+
+    .incident-location {
+        margin-top: 0.8em;
     }
 }

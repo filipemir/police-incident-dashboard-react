@@ -8,6 +8,10 @@ import IncidentCard from '../IncidentCard';
  * @param incidents {Incident[]}
  */
 export default function IncidentFeed({ incidents, onIncidentClick }) {
+    if (!incidents || incidents.length === 0) {
+        return null;
+    }
+
     return (
         <div className={'incident-feed'}>
             <h2 className={'incident-feed-title'}>Most Recent Incidents</h2>
