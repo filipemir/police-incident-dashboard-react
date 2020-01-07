@@ -4,7 +4,7 @@ import moment from 'moment';
 import Map from './components/Map';
 import Menu from './components/Menu';
 import './styles/global.scss';
-import { ONE_DAY } from './constants/timeframes';
+import { SEVEN_DAYS } from './constants/timeframes';
 import { getTimeframeDates } from './utils/timeframes';
 import { getIncidents } from './utils/client';
 import useIncidentsReducer, { getVisibleIncidents, loadIncidents } from './state/incidents';
@@ -12,13 +12,11 @@ import { loadIncidentsAndResetFilters } from './state/incidents/actions';
 import IncidentFeed from './components/IncidentFeed';
 import { getAllIncidents } from './state/incidents/selectors';
 
-// TODO: End date should be the present but BPD hasn't been updating their data while they work on
-// switching something or other about their systems, so for now we have to work with stale data
-const END_DATE = moment('2019-09-20');
+const END_DATE = moment();
 
 export default function App() {
     const [loading, setLoading] = useState(true),
-        [timeframe, setTimeframe] = useState(ONE_DAY),
+        [timeframe, setTimeframe] = useState(SEVEN_DAYS),
         [dates, setDates] = useState(
             getTimeframeDates({
                 timeframe,
