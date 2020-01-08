@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/police-incident-dashboard-react/static/css/main.249e159e.chunk.css",
-    "main.js": "/police-incident-dashboard-react/static/js/main.0a5e48f5.chunk.js",
-    "main.js.map": "/police-incident-dashboard-react/static/js/main.0a5e48f5.chunk.js.map",
+    "main.css": "/police-incident-dashboard-react/static/css/main.b739f76e.chunk.css",
+    "main.js": "/police-incident-dashboard-react/static/js/main.87f853c3.chunk.js",
+    "main.js.map": "/police-incident-dashboard-react/static/js/main.87f853c3.chunk.js.map",
     "runtime-main.js": "/police-incident-dashboard-react/static/js/runtime-main.2fe39cb0.js",
     "runtime-main.js.map": "/police-incident-dashboard-react/static/js/runtime-main.2fe39cb0.js.map",
-    "static/js/2.f678817f.chunk.js": "/police-incident-dashboard-react/static/js/2.f678817f.chunk.js",
-    "static/js/2.f678817f.chunk.js.map": "/police-incident-dashboard-react/static/js/2.f678817f.chunk.js.map",
+    "static/js/2.a4b73ef3.chunk.js": "/police-incident-dashboard-react/static/js/2.a4b73ef3.chunk.js",
+    "static/js/2.a4b73ef3.chunk.js.map": "/police-incident-dashboard-react/static/js/2.a4b73ef3.chunk.js.map",
     "index.html": "/police-incident-dashboard-react/index.html",
-    "precache-manifest.f92385eff114d1094c961f0a6bebe4ee.js": "/police-incident-dashboard-react/precache-manifest.f92385eff114d1094c961f0a6bebe4ee.js",
+    "precache-manifest.634bf3c304eec2719bc3f51ed6aba7bd.js": "/police-incident-dashboard-react/precache-manifest.634bf3c304eec2719bc3f51ed6aba7bd.js",
     "service-worker.js": "/police-incident-dashboard-react/service-worker.js",
-    "static/css/main.249e159e.chunk.css.map": "/police-incident-dashboard-react/static/css/main.249e159e.chunk.css.map",
+    "static/css/main.b739f76e.chunk.css.map": "/police-incident-dashboard-react/static/css/main.b739f76e.chunk.css.map",
     "static/media/arrows.svg": "/police-incident-dashboard-react/static/media/arrows.6820edc8.svg",
     "static/media/controls.svg": "/police-incident-dashboard-react/static/media/controls.8fd6a55e.svg"
   }
