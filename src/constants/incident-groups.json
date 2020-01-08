@@ -639,6 +639,10 @@
         "GROUP": "Larceny",
         "VIOLENT": "N"
     },
+    "641": {
+        "GROUP": "Larceny From Motor Vehicle",
+        "VIOLENT": "N"
+    },
     "649": {
         "GROUP": "Larceny",
         "VIOLENT": "N"
@@ -904,6 +908,10 @@
         "VIOLENT": "N"
     },
     "1721": {
+        "GROUP": "Sexual Offense",
+        "VIOLENT": "N"
+    },
+    "1722": {
         "GROUP": "Sexual Offense",
         "VIOLENT": "N"
     },
@@ -1291,6 +1299,10 @@
         "GROUP": "Criminal Harassment",
         "VIOLENT": "N"
     },
+    "2671": {
+        "GROUP": "Harassment",
+        "VIOLENT": ""
+    },
     "2672": {
         "GROUP": "Biological Threat",
         "VIOLENT": "N"
@@ -1380,6 +1392,10 @@
         "VIOLENT": "N"
     },
     "3004": {
+        "GROUP": "Medical Assistance",
+        "VIOLENT": "N"
+    },
+    "3005": {
         "GROUP": "Medical Assistance",
         "VIOLENT": "N"
     },
@@ -1492,6 +1508,10 @@
         "VIOLENT": "N"
     },
     "3125": {
+        "GROUP": "Warrant Arrests",
+        "VIOLENT": "N"
+    },
+    "3126": {
         "GROUP": "Warrant Arrests",
         "VIOLENT": "N"
     },

@@ -11,7 +11,7 @@ import {
     TOGGLE_DISTRICT,
     TOGGLE_INCIDENT_GROUP
 } from './actions';
-import { getIncidentGroupName } from '../../utils/codeGroups';
+import { getIncidentGroupName, reportUnknownCodeGroups } from '../../utils/codeGroups';
 import { filterIncidents, sortIncidentsByDescendingDate } from '../../utils/incidents';
 
 const INITIAL_STATE = {
@@ -67,6 +67,8 @@ function reduceLoadIncidents(state, { incidents }) {
 
     let total = 0,
         totalVisible = 0;
+
+    reportUnknownCodeGroups(filteredIncidents);
 
     // First reset filters and counts:
     filteredIncidents.forEach(incident => {

@@ -1,4 +1,4 @@
-export const ONE_HOUR = { value: 1, unit: 'hour' };
+// export const ONE_HOUR = { value: 1, unit: 'hour' };
 export const ONE_DAY = { value: 1, unit: 'day' };
 export const SEVEN_DAYS = { value: 7, unit: 'days' };
 export const THIRTY_DAYS = { value: 30, unit: 'days' };
@@ -6,4 +6,4 @@ export const THIRTY_DAYS = { value: 30, unit: 'days' };
 // export const SIX_MONTHS = { value: 6, unit: 'months' };
 // export const ONE_YEAR = { value: 1, unit: 'year' };
 
-export const TIMEFRAMES = [ONE_HOUR, ONE_DAY, SEVEN_DAYS, THIRTY_DAYS];
+export const TIMEFRAMES = [ONE_DAY, SEVEN_DAYS, THIRTY_DAYS];
