@@ -10,7 +10,6 @@ import { getIncidents } from './utils/client';
 import useIncidentsReducer, { getVisibleIncidents, loadIncidents } from './state/incidents';
 import { loadIncidentsAndResetFilters } from './state/incidents/actions';
 import IncidentFeed from './components/IncidentFeed';
-import { getAllIncidents } from './state/incidents/selectors';
 
 const END_DATE = moment();
 
@@ -61,7 +60,7 @@ export default function App() {
                 dispatchIncidentsAction={dispatchIncidentsAction}
             />
             <Map incidents={getVisibleIncidents(incidentsState)} />
-            <IncidentFeed incidents={getAllIncidents(incidentsState)} />
+            <IncidentFeed incidents={getVisibleIncidents(incidentsState)} />
         </div>
     );
 }

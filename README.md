@@ -1,6 +1,6 @@
 # [WIP] Boston Police Incident Dashboard
 
-A real-time visualization of crime incidents as reported by the Boston Police department. See it
+A visualization of crime incidents as reported by the Boston Police department. See it
 here: https://filipemir.github.io/police-incident-dashboard-react/
 
 This is a project initially started by Code for Boston volunteers during the 2019 National Day of Civic Hacking.
