@@ -3,7 +3,8 @@
 .menu-root {
     $header-height: 90px;
     $header-height-mobile: 50px;
-    $footer-height: 75px;
+    $footer-height: 100px;
+    $footer-height-mobile: 75px;
 
     position: fixed;
     z-index: 1;
@@ -130,7 +131,7 @@
     &.collapsed {
         width: 50px;
         margin-top: $header-height-mobile;
-        height: calc(100vh - #{$header-height-mobile} - #{$footer-height});
+        height: calc(100vh - #{$header-height-mobile} - #{$footer-height-mobile});
 
         .menu-title {
             height: $header-height-mobile;
@@ -139,6 +140,11 @@
             h1 {
                 margin-top: 20px;
             }
+        }
+
+        .menu-footer {
+            height: $footer-height-mobile;
+            bottom: -$footer-height-mobile;
         }
 
         .menu-title {

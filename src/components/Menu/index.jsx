@@ -113,6 +113,15 @@ export default function Menu({
                         <a href='https://www.codeforboston.org/' target='_blank' rel='noopener noreferrer'>
                             Code for Boston
                         </a>
+                        <br />
+                        Data from{' '}
+                        <a
+                            href='https://data.boston.gov/dataset/crime-incident-reports-august-2015-to-date-source-new-system/resource/12cb3883-56f5-47de-afa5-3b1cf61b257b'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                        >
+                            boston.data.gov
+                        </a>
                     </div>
                 )}
             </div>
