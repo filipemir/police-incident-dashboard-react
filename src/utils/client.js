@@ -15,6 +15,7 @@ let counter = 0;
  *
  * @param startDate - moment date
  * @param endDate - moment date
+ * @returns {Incident[]}
  */
 export async function getIncidents({ startDate, endDate }) {
     const sqlQuery = `SELECT * 

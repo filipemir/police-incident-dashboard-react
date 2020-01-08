@@ -12,7 +12,7 @@ import {
     TOGGLE_INCIDENT_GROUP
 } from './actions';
 import { getIncidentGroupName } from '../../utils/codeGroups';
-import { sortIncidentsByDescendingDate } from '../../utils/incidents';
+import { filterIncidents, sortIncidentsByDescendingDate } from '../../utils/incidents';
 
 const INITIAL_STATE = {
     incidents: {
@@ -62,13 +62,14 @@ function reduceLoadIncidents(state, { incidents }) {
         visibleDistricts = districtsPreviouslyFiltered ? state.filters.visibleDistricts : new Set(),
         map = {},
         perGroup = {},
-        perDistrict = {};
+        perDistrict = {},
+        filteredIncidents = filterIncidents(incidents);
 
     let total = 0,
         totalVisible = 0;
 
     // First reset filters and counts:
-    incidents.forEach(incident => {
+    filteredIncidents.forEach(incident => {
         const groupName = getIncidentGroupName(incident),
             district = incident.DISTRICT;
 
@@ -85,7 +86,7 @@ function reduceLoadIncidents(state, { incidents }) {
     });
 
     // Then reset visible ids and totals:
-    incidents.forEach(incident => {
+    filteredIncidents.forEach(incident => {
         if (incidentIsVisible({ incident, filters: { visibleDistricts, visibleGroups } })) {
             visibleIds.add(incident._clientSideId);
             totalVisible += 1;
@@ -93,7 +94,12 @@ function reduceLoadIncidents(state, { incidents }) {
     });
 
     return {
-        incidents: { map, hiddenIds: new Set(), visibleIds, sortedByDate: sortIncidentsByDescendingDate(incidents) },
+        incidents: {
+            map,
+            hiddenIds: new Set(),
+            visibleIds,
+            sortedByDate: sortIncidentsByDescendingDate(filteredIncidents)
+        },
         counts: { total, totalVisible, perGroup, perDistrict },
         filters: { visibleGroups, visibleDistricts }
     };
