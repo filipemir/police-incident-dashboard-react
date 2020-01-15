@@ -2,7 +2,7 @@
   "name": "bos-criminal-incidence",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://filipemir.github.io/police-incident-dashboard-react/",
+  "homepage": "https://filipemir.github.io/police-incident-dashboard-react",
   "dependencies": {
     "d3-scale": "3.1.0",
     "d3-scale-chromatic": "1.5.0",
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "PUBLIC_URL=https://filipemir.github.io/police-incident-dashboard-react react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
