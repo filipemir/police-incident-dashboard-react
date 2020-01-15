@@ -1,19 +1,39 @@
+@import '../../styles/vars.scss';
+
 .map-root {
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-  z-index: 0;
-
-  .leaflet-container {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
     z-index: 0;
-  }
 
-  .incident-marker {
-    background-color: #cc0202;
-    border: 1px solid #cc0202;
-    border-radius: 50%;
-    opacity: 0.25;
-  }
+    .leaflet-container {
+        height: 100%;
+        width: 100%;
+        z-index: 0;
+    }
+
+    .incident-marker {
+        background-color: #cc0202;
+        border: 1px solid #cc0202;
+        border-radius: 50%;
+        opacity: 0.25;
+    }
+
+    .leaflet-popup-content {
+        color: $white;
+    }
+
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+        background-color: $gray2;
+    }
+
+    .map-popup__field-name {
+        text-transform: uppercase;
+        color: $teal;
+    }
+
+    .map-popup__field-val {
+        text-align: right;
+    }
 }

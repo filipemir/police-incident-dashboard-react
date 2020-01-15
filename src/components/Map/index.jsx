@@ -4,7 +4,9 @@ import * as leaflet from 'leaflet';
 import { Map, TileLayer, GeoJSON } from 'react-leaflet';
 
 import './styles.scss';
+import moment from 'moment';
 import { codeGroupScale, getIncidentGroupName } from '../../utils/codeGroups';
+import { getDistrictName } from '../../utils/districts';
 
 const TILE_LAYER_URL = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
     TILE_LAYER_ATTRIBUTION =
@@ -27,9 +29,47 @@ function getIncidentMarker(incident, latLng) {
 }
 
 function bindIncidentPopup(feature, layer) {
-    const properties = Object.keys(feature.properties).filter(p => !p.startsWith('_'));
-    const list = properties.map(p => `<tr><th>${p.replace(/_/g, ' ')}</th><td>${feature.properties[p]}<td></tr>`);
-    layer.bindPopup(`<table><tbody>${list}</tbody></table>`);
+    const props = feature.properties;
+    layer.bindPopup(`<table class="map-popup"><tbody>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">Description:</th>
+            <td class="map-popup__field-val">${props.OFFENSE_DESCRIPTION || 'N/A'}</td>
+        </tr>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">Shooting:</th>
+            <td class="map-popup__field-val">${props.SHOOTING === '1' ? 'Yes' : 'No'}</td>
+        </tr>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">Date:</th>
+            <td class="map-popup__field-val">${
+                props.OCCURRED_ON_DATE ? moment(props.OCCURRED_ON_DATE).format('ll') : 'N/A'
+            }</td>
+        </tr>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">Time:</th>
+            <td class="map-popup__field-val">${
+                props.OCCURRED_ON_DATE ? moment(props.OCCURRED_ON_DATE).format('hh:mma') : 'N/A'
+            }</td>
+        </tr>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">Street:</th>
+            <td class="map-popup__field-val">${props.STREET || 'N/A'}</td>
+        </tr>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">District:</th>
+            <td class="map-popup__field-val">${
+                props.DISTRICT ? getDistrictName({ districtCode: props.DISTRICT }) + ' (' + props.DISTRICT + ')' : 'N/A'
+            }</td>
+        </tr>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">Reporting Area:</th>
+            <td class="map-popup__field-val">${props.REPORTING_AREA || 'N/A'}</td>
+        </tr>
+        <tr class="map-popup__field">
+            <th class="map-popup__field-name">Incident Number:</th>
+            <td class="map-popup__field-val">${props.INCIDENT_NUMBER || 'N/A'}</td>
+        </tr>
+    </tbody></table>`);
 }
 
 /**

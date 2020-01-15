@@ -22,8 +22,12 @@ export default function IncidentCard({ incident }) {
             </div>
             <div className={'incident-location'}>
                 <span className={'incident-district'}>{getDistrictName({ districtCode: incident.DISTRICT })}</span>
-                <span>, </span>
-                <span className={'incident-street'}>{incident.STREET}</span>
+                {incident.STREET && (
+                    <>
+                        <span>, </span>
+                        <span className={'incident-street'}>{incident.STREET}</span>
+                    </>
+                )}
             </div>
         </div>
     );
