@@ -37,6 +37,17 @@ export function getVisibleIncidents(state) {
     return result;
 }
 
+export function getVisibleIncidentsSortedByDate(state) {
+    const { visibleIds, sortedByDate } = state.incidents,
+        result = [];
+
+    sortedByDate.forEach(i => {
+        visibleIds.has(i._clientSideId) && result.push(i);
+    });
+
+    return result;
+}
+
 /**
  * @param state {IncidentsState}
  * @returns {Set<string>}
