@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "934ba8a2a999341e079eb4aa832c7a19",
+    "revision": "8b89eefc88f99680a9ecef09520c33ab",
     "url": "https://filipemir.github.io/police-incident-dashboard-react/index.html"
   },
   {
-    "revision": "707463304ca222fb4f34",
-    "url": "https://filipemir.github.io/police-incident-dashboard-react/static/css/main.4b03e3f8.chunk.css"
+    "revision": "26e8bb65afb39c01298d",
+    "url": "https://filipemir.github.io/police-incident-dashboard-react/static/css/main.c6f26400.chunk.css"
   },
   {
-    "revision": "de5656489b78a6f0537c",
-    "url": "https://filipemir.github.io/police-incident-dashboard-react/static/js/2.0c155232.chunk.js"
+    "revision": "63313dbe361a4128cc1c",
+    "url": "https://filipemir.github.io/police-incident-dashboard-react/static/js/2.cc59d3de.chunk.js"
   },
   {
-    "revision": "707463304ca222fb4f34",
-    "url": "https://filipemir.github.io/police-incident-dashboard-react/static/js/main.005398b1.chunk.js"
+    "revision": "26e8bb65afb39c01298d",
+    "url": "https://filipemir.github.io/police-incident-dashboard-react/static/js/main.c308aa12.chunk.js"
   },
   {
     "revision": "3dabecc23ed9cfdfe153",
