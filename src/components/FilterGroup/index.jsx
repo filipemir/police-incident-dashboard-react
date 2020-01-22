@@ -5,7 +5,7 @@ import { ReactSVG } from 'react-svg';
 import arrows from '../../images/arrows.svg';
 
 export default function FilterGroup({ title, summary, children, onSelectAll, onUnselectAll }) {
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(true);
 
     return (
         <div className={`filterer ${expanded ? 'filterer__expanded' : ''}`}>
