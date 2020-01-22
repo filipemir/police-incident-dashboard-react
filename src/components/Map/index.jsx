@@ -76,7 +76,7 @@ function bindIncidentPopup(feature, layer) {
  * @returns React component
  * @constructor
  */
-export default function IncidentMap({ incidents }) {
+export default function IncidentMap({ incidents, onMarkerAdded }) {
     const geojsonData = geojson.parse(incidents, { Point: ['Lat', 'Long'] });
 
     return (
@@ -86,7 +86,11 @@ export default function IncidentMap({ incidents }) {
                 <GeoJSON
                     key={Math.random()}
                     data={geojsonData}
-                    pointToLayer={getIncidentMarker}
+                    pointToLayer={(incident, latLng) => {
+                        const marker = getIncidentMarker(incident, latLng);
+                        onMarkerAdded({ incident: incident.properties, marker });
+                        return marker;
+                    }}
                     onEachFeature={bindIncidentPopup}
                 />
             </Map>

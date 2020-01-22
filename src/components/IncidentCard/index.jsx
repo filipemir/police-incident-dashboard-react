@@ -9,12 +9,12 @@ import { codeGroupScale, getIncidentGroupName } from '../../utils/codeGroups';
  *
  * @param incident {Incident}
  */
-export default function IncidentCard({ incident }) {
+export default function IncidentCard({ incident, onIncidentClick }) {
     const incidentGroupName = getIncidentGroupName(incident),
         groupColor = codeGroupScale(incidentGroupName);
 
     return (
-        <div className={'incident-card'} style={{ borderColor: groupColor }}>
+        <div className={'incident-card'} style={{ borderColor: groupColor }} onClick={() => onIncidentClick(incident)}>
             <div className={'incident-time'}>{moment(incident.OCCURRED_ON_DATE).format('llll')}</div>
             <div className='incident-description'>
                 <span className={'incident-group-name'}>{incidentGroupName}</span>

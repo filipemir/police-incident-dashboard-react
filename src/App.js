@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 
 import Map from './components/Map';
@@ -11,6 +11,7 @@ import useIncidentsReducer, { getVisibleIncidents, loadIncidents } from './state
 import { loadIncidentsAndResetFilters } from './state/incidents/actions';
 import IncidentFeed from './components/IncidentFeed';
 import { getVisibleIncidentsSortedByDate } from './state/incidents/selectors';
+import useIncidentMarkers from './hooks/useIncidentMarkers';
 
 const END_DATE = moment();
 
@@ -23,7 +24,8 @@ export default function App() {
                 endDate: END_DATE
             })
         ),
-        [incidentsState, dispatchIncidentsAction] = useIncidentsReducer();
+        [incidentsState, dispatchIncidentsAction] = useIncidentsReducer(),
+        [getMarker, addMarker] = useIncidentMarkers();
 
     useEffect(() => {
         const { startDate, endDate } = getTimeframeDates({ timeframe, endDate: END_DATE });
@@ -60,8 +62,14 @@ export default function App() {
                 incidentsState={incidentsState}
                 dispatchIncidentsAction={dispatchIncidentsAction}
             />
-            <Map incidents={getVisibleIncidents(incidentsState)} />
-            <IncidentFeed incidents={getVisibleIncidentsSortedByDate(incidentsState)} />
+            <Map incidents={getVisibleIncidents(incidentsState)} onMarkerAdded={addMarker} />
+            <IncidentFeed
+                incidents={getVisibleIncidentsSortedByDate(incidentsState)}
+                onIncidentClick={incident => {
+                    const marker = getMarker(incident);
+                    marker && marker.openPopup();
+                }}
+            />
         </div>
     );
 }
