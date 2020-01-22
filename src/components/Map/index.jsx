@@ -30,7 +30,8 @@ function getIncidentMarker(incident, latLng) {
 
 function bindIncidentPopup(feature, layer) {
     const props = feature.properties;
-    layer.bindPopup(`<table class="map-popup"><tbody>
+    layer.bindPopup(
+        `<table class="map-popup"><tbody>
         <tr class="map-popup__field">
             <th class="map-popup__field-name">Description:</th>
             <td class="map-popup__field-val">${props.OFFENSE_DESCRIPTION || 'N/A'}</td>
@@ -69,7 +70,9 @@ function bindIncidentPopup(feature, layer) {
             <th class="map-popup__field-name">Incident Number:</th>
             <td class="map-popup__field-val">${props.INCIDENT_NUMBER || 'N/A'}</td>
         </tr>
-    </tbody></table>`);
+    </tbody></table>`,
+        { autoPan: true, autoPanPadding: new leaflet.Point(100, 100) }
+    );
 }
 
 /**
